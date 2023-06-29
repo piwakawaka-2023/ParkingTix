@@ -1,54 +1,54 @@
-### Simple Actions:
+# Simple Actions:
 
-# Actions Disputes:
+### Actions Disputes:
 SET_DISPUTES
 DEL_DISPUTE
 ADD_DISPUTE
 
-# Reducers Disputes:
+### Reducers Disputes:
 disputesReducer()
 
-# Actions Users:
+### Actions Users:
 SET_USERS
 DEL_USER
 ADD_USER
 UPD_USER
 
-# Reducers Users:
+### Reducers Users:
 usersReducer()
 
-# Actions Emails:
+### Actions Emails:
 SET_EMAILS
 ADD_EMAIL
 
-# Reducers Emails:
+### Reducers Emails:
 emailsReducer()
 
-### Thunk Actions:
+# Thunk Actions:
 
 ## External apis:
 
-# OpenAI api:
+### OpenAI api:
 GENERATE_EMAIL
 GENERATE_RESPONSE
 
-# Gmail api:
+### Gmail api:
 GET_INBOX
 SEND_EMAIL
 
 ## Internal api: (These will only get information relevant to the given user)
 
-# Actions Users:
+### Actions Users:
 GET_USER
 DEL_USER
 ADD_USER
 UPD_USER
 
-# Actions Disputes:
+### Actions Disputes:
 GET_DISPUTES
 DEL_DISPUTE
 ADD_DISPUTE
 
-# Actions Emails:
+### Actions Emails:
 GET_EMAILS
 ADD_EMAIL

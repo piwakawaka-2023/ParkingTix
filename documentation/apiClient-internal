@@ -1,6 +1,6 @@
-## Internal Api Functions
+# Internal Api Functions
 
-# Users:
+## Users:
 
 fetchUser(id: number, token: string)
 postUser(user: UserObject, token: string)
@@ -8,7 +8,7 @@ patchUser(id: number, token: string)
 deleteUser(id: number, token: string)
 
 
-# Disputes:
+## Disputes:
 GET_DISPUTES
 DEL_DISPUTE
 ADD_DISPUTE
@@ -20,7 +20,7 @@ deleteDispute(id: number, token: string)
 
 fetchUser(id: number, token: string)
 
-# Emails:
+## Emails:
 GET_EMAILS
 ADD_EMAIL
 
