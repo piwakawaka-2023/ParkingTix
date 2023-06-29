@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
 
 function Nav() {
-
-  
   return (
     <>
       <ul>
@@ -11,6 +9,9 @@ function Nav() {
         </li>
         <li>
           <Link to="/disputes">Go to Disputes</Link>
+        </li>
+        <li>
+          <Link to="/adddisputes">Add Disputes</Link>
         </li>
       </ul>
     </>
