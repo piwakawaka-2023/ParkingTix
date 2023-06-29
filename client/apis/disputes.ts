@@ -20,6 +20,6 @@ export async function postDispute(
   return newDisputeFromDb
 }
 
-export async function removeDispute(id: number) {
+export async function deleteDispute(id: number) {
   await request.delete(`${disputesUrl}/${id}`)
 }

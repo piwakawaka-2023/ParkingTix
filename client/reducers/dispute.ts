@@ -28,16 +28,7 @@ export type Action =
 //* ----------------------------- *//
 //*   Reducer Function
 //* ----------------------------- *//
-export default function disputeReducers(state =  id: number
-  created_at: number
-  user_id: number
-  infringement: number
-  registration: string
-  date_issued: string
-  time_issued: string
-  location: string
-  amount: number
-  status: stringinitialState, action: Action) {
+export default function disputeReducers(state = initialState, action: Action) {
   const { type, payload } = action
   switch (type) {
     case SET_DISPUTES:
