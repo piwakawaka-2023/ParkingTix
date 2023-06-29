@@ -13,5 +13,5 @@ exports.up = function (knex) {
 }
 
 exports.down = function (knex) {
-  return knex.schemaknex.dropTable('disputes')
+  return knex.schema.dropTable('emails')
 }
