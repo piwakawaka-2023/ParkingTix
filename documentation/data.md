@@ -32,11 +32,11 @@ UserData {
 ```js
 disputes {
   id: integer
-  created_at: timestamp
+  created_at: integer
   user_id: integer
   infringement: integer
   registration: string
-  date_issued: date
+  date_issued: string
   time_issued: string
   location: string
   amount: integer
@@ -53,7 +53,7 @@ Valid statuses:
 ```js
  emails {
   id: integer
-  created_at: timestamp
+  created_at: integer
   dispute_id: integer
   content: string
 }

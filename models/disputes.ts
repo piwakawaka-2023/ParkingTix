@@ -1,10 +1,10 @@
 export interface DisputeObj {
     id: number
-    created_at: Date
+    created_at: number
     user_id: number
     infringement: number
     registration: string
-    date_issued: Date
+    date_issued: string
     time_issued: string
     location: string
     amount: number
@@ -15,7 +15,7 @@ export interface DisputeObj {
     user_id: number
     infringement: number
     registration: string
-    date_issued: Date
+    date_issued: string
     time_issued: string
     location: string
     amount: number
@@ -26,7 +26,7 @@ export interface DisputeObj {
     user_id?: number
     infringement?: number
     registration?: string
-    date_issued?: Date
+    date_issued?: string
     time_issued?: string
     location?: string
     amount?: number
