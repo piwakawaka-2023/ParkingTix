@@ -1,12 +1,12 @@
 import express from 'express'
 // import checkJwt, { JwtRequest } from '../auth0'
 const router = express.Router()
-import * as db from '../db/db'
+import * as db from '../db/disputes'
 
 router.get('/:userId', async (req, res) => {
-  const id = +req.params.userId
+  const user_id = +req.params.userId
   try {
-    const disputes = await db.getDisputes(id)
+    const disputes = await db.getDisputesByUserId(user_id)
     res.json(disputes)
   } catch (error) {
     res.sendStatus(500)
@@ -16,7 +16,7 @@ router.get('/:userId', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const id = +req.params.id
   try {
-    await db.deleteDispute(id)
+    await db.delDispute(id)
     res.sendStatus(200)
   } catch (error) {
     res.sendStatus(500)
@@ -32,3 +32,5 @@ router.post('/', async (req, res) => {
     res.sendStatus(500)
   }
 })
+
+export default router
