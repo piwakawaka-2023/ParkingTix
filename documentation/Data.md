@@ -1,4 +1,23 @@
-### Data shapes / Interfaces
+# Data shapes / Interfaces
+
+## Models, naming conventions
+
+Models will be imported using the following convention:
+
+use namespace with 'Models' suffix
+```js
+import * as UserModels from '../models/users'
+import * as DisputeModels from '../models/disputes'
+```
+
+Interfaces use 'Obj', 'New', 'Update':
+```js
+UserModels.UserObj
+UserModels.New
+UserModels.Update
+```
+
+## Objects
 
 ```js
 UserData {

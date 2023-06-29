@@ -1,10 +1,4 @@
-## Internal Api Functions
-
-
-
-<!-- fetchEmails(id: number, token: string) -->
-<!-- postDispute(dispute: DisputeObject, token: string) -->
-
+# Internal Api Functions
 
 ## API (Client - Server)
 
@@ -16,8 +10,6 @@
 | Post | postUser | /api/v1/users | No | Add a user to database | Objects (object = User) |
 | Patch | patchUser | /api/v1/users/:id | No | Update user information send status | status(200) |
 
-
-
 #### DISPUTES
 | Method | API Function Name | Endpoint | Protected | Usage | Response |
 | --- | --- | --- | --- | --- | --- |
@@ -25,9 +17,7 @@
 | Delete | deleteDispute | /api/v1/dispute/:id | No | Delete dispute from the DB | id |
 | Post | postDispute | /api/v1/dispute | No | Add a dispute to database | Objects (object = Dispute) |
 
-# Emails:
-
-
+### Emails:
 | Method | API Function Name | Endpoint | Protected | Usage | Response |
 | --- | --- | --- | --- | --- | --- |
 | Get | fetchEmail | /api/v1/email/dispute_id | No | Get a email by dispute id from the DB | (object = email) |
