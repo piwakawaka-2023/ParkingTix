@@ -15,7 +15,7 @@ function Dispute(props: Props) {
         <h2>Registration Number:{dispute.registration}</h2>
         <p>Time issued:{dispute.time_issued}</p>
         <p>Location:{dispute.location}</p>
-        <p>Pay up B$:{dispute.amount}</p>
+        <p>Amount Due: ${dispute.amount}</p>
       </div>
     </>
   )
