@@ -1,11 +1,13 @@
-import db from './connection'
-import * as disputes from '../../models/disputes'
+import connection from './connection'
+import * as DisputeModels from '../../models/disputes'
+
+const db = connection
 
 export function getDisputesByUserId(user_id: number) {
-  return db('disputes').select().where({ user_id })
+  return db('disputes').select()
 }
 
-export function addDispute(dispute: disputes.New) {
+export function addDispute(dispute: DisputeModels.New) {
   return db('disputes').insert(dispute)
 }
 
