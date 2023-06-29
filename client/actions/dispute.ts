@@ -86,7 +86,7 @@ export function deleteDisputeThunk(id: number): ThunkAction {
 }
 
 //* Add Dispute Thunk
-export function addMovieThunk(dispute: Models.New): ThunkAction {
+export function addDisputeThunk(dispute: Models.New): ThunkAction {
   return async (dispatch) => {
     try {
       const disputeData = await postDispute(dispute)
