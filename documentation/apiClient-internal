@@ -1,0 +1,28 @@
+## Internal Api Functions
+
+# Users:
+
+fetchUser(id: number, token: string)
+postUser(user: UserObject, token: string)
+patchUser(id: number, token: string)
+deleteUser(id: number, token: string)
+
+
+# Disputes:
+GET_DISPUTES
+DEL_DISPUTE
+ADD_DISPUTE
+
+fetchDisputes(id: number, token: string)
+postDispute(dispute: DisputeObject, token: string)
+deleteDispute(id: number, token: string)
+
+
+fetchUser(id: number, token: string)
+
+# Emails:
+GET_EMAILS
+ADD_EMAIL
+
+<!-- fetchEmails(id: number, token: string) -->
+<!-- postDispute(dispute: DisputeObject, token: string) -->
