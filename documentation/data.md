@@ -22,8 +22,8 @@ UserModels.Update
 ```js
 UserData {
   id: number
-  name: string
   created_at: number
+  name: string
   profile_image: string
   email: string
 }
@@ -34,14 +34,19 @@ disputes {
   id: integer
   created_at: timestamp
   user_id: integer
-  infringement: number
+  infringement: integer
   registration: string
   date_issued: date
   time_issued: string
   location: string
-  amount: number
+  amount: integer
   status: string
 }
+```
+
+Valid statuses:
+```js
+['New', 'Pending Response', 'In Progress', 'Paused', 'In Progress (User Override)', 'Appeal Failed', 'Resolved']
 ```
 
 
