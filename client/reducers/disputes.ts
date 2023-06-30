@@ -13,7 +13,7 @@ import {
   SET_DISPUTES,
   DEL_DISPUTES,
   ADD_DISPUTES,
-} from '../actions/dispute'
+} from '../actions/disputes'
 
 //* ----------------------------- *//
 //*   Variables
