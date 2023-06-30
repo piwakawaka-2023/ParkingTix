@@ -4,7 +4,7 @@ import * as DisputeModels from '../../models/disputes'
 const db = connection
 
 export function getDisputesByUserId(user_id: number) {
-  return db('disputes').select()
+  return db('disputes').select().where({ user_id })
 }
 
 export function addDispute(dispute: DisputeModels.New) {

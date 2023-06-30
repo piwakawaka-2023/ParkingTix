@@ -1,13 +1,14 @@
 import express from 'express'
 // import checkJwt, { JwtRequest } from '../auth0'
+
 const router = express.Router()
-import * as db from '../db/db'
+import * as db from '../db/users'
 
 router.get('/:id', async (req, res) => {
   const id = +req.params.id
   try {
-    const user = await db.getUser(id)
-    res.json(user)
+    const user = await db.getUserById(id)
+    res.json(user[0])
   } catch (error) {
     res.sendStatus(500)
   }
@@ -16,7 +17,7 @@ router.get('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const id = +req.params.id
   try {
-    await db.deleteUser(id)
+    await db.delUser(id)
     res.sendStatus(200)
   } catch (error) {
     res.sendStatus(500)
@@ -43,3 +44,5 @@ router.patch('/:id', async (req, res) => {
     res.sendStatus(500)
   }
 })
+
+export default router
