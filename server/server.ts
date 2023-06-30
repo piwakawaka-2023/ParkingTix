@@ -4,7 +4,7 @@ import path from 'path'
 import users from './routes/users'
 import disputes from './routes/disputes'
 import emails from './routes/emails'
-import router from './apiRoutes'
+import router from './openAiRoutes'
 
 const server = express()
 
