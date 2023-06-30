@@ -1,7 +1,6 @@
 import type { ThunkAction } from '../store'
 import * as UserModels from '../../models/users'
 import * as api from '../apis/users'
-import { useParams } from 'react-router-dom'
 
 // * SIMPLE ACTIONS
 
