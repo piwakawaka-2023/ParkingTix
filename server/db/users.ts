@@ -12,7 +12,17 @@ export function addUser(newUser: UserModels.New) {
 }
 
 export function updateUser(id: number, newUser: UserModels.Update) {
-  return db('users').update(newUser).where({ id }).returning('*')
+  const { name, profile_image, email } = newUser
+  return db('users')
+    .select()
+    .where({ id })
+    .first()
+    .update({
+      name,
+      profile_image,
+      email,
+    })
+    .returning('*')
 }
 
 export function delUser(id: number) {

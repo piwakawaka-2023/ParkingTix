@@ -38,8 +38,8 @@ router.patch('/:id', async (req, res) => {
   const id = +req.params.id
   const userEdit = req.body
   try {
-    await db.updateUser(id, userEdit)
-    res.sendStatus(200)
+    const newUser = await db.updateUser(id, userEdit)
+    res.json(newUser[0])
   } catch (err) {
     res.sendStatus(500)
   }
