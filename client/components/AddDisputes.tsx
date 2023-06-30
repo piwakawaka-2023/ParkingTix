@@ -61,7 +61,7 @@ function AddDisputes() {
 
       <label htmlFor="amount">Amount Due: $</label>
       <input type="number" id="amount" name="amount" onChange={handleChange} />
-
+      newDispute
       <label htmlFor="payUp">This is how much I want to pay!</label>
       <input type="text" id="payUp" name="payUp" onChange={handleChange} />
 

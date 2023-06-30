@@ -10,6 +10,7 @@
 import type { ThunkAction } from '../store'
 import * as Models from '../../models/disputes' // DisputeObj, New, Update
 import { fetchDisputes, deleteDispute, postDispute } from '../apis/disputes'
+import { useParams } from 'react-router-dom'
 
 //* ----------------------------- *//
 //*   Variables
@@ -63,9 +64,10 @@ export function error(message: string): Action {
 
 //* Get Dispute Thunk
 export function getDisputes(): ThunkAction {
+  const user = useParams.userId
   return async (dispatch) => {
     try {
-      const disputesArr = await fetchDisputes()
+      const disputesArr = await fetchDisputes(user)
       dispatch(setDisputes(disputesArr))
     } catch (err) {
       dispatch(error(String(err)))
