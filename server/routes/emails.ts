@@ -17,7 +17,7 @@ router.get('/:disputeId', async (req, res) => {
 router.post('/', async (req, res) => {
   const email = req.body
   try {
-    const newEmail = await db.addDispute(email)
+    const newEmail = await db.addEmail(email)
     res.json(newEmail)
   } catch (err) {
     res.sendStatus(500)

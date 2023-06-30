@@ -7,10 +7,10 @@ export function getEmailsByDisputeId(dispute_id: number) {
   return db('emails').select().where({ dispute_id })
 }
 
-export function addDispute(dispute: EmailModels.New) {
-  return db('disputes').insert(dispute)
+export function addEmail(email: EmailModels.New) {
+  return db('emails').insert(email)
 }
 
 export function delDispute(id: number) {
-  return db('disputes').delete().where('id', id)
+  return db('emails').delete().where({ id })
 }
