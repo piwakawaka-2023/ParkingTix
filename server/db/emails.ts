@@ -8,9 +8,5 @@ export function getEmailsByDisputeId(dispute_id: number) {
 }
 
 export function addEmail(email: EmailModels.New) {
-  return db('emails').insert(email)
-}
-
-export function delDispute(id: number) {
-  return db('emails').delete().where({ id })
+  return db('emails').insert(email).returning('*')
 }
