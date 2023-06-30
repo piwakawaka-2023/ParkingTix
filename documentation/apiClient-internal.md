@@ -13,13 +13,13 @@
 #### DISPUTES
 | Method | API Function Name | Endpoint | Protected | Usage | Response |
 | --- | --- | --- | --- | --- | --- |
-| Get | fetchDisputes | /api/v1/dispute/user_id | No | Get a list of disputes by user id from the DB | An array of Objects (object = dispute) |
-| Delete | deleteDispute | /api/v1/dispute/:id | No | Delete dispute from the DB | id |
-| Post | postDispute | /api/v1/dispute | No | Add a dispute to database | Objects (object = Dispute) |
-| Patch | updateDispute | /api/v1/dispute | No | Update dispute in database, especially for status | Objects (object = Dispute) |
+| Get | fetchDisputes | /api/v1/disputes/:user_id | No | Get a list of disputes by user id from the DB | An array of Objects (object = dispute[]) |
+| Delete | deleteDispute | /api/v1/disputes/:id | No | Delete dispute from the DB | Status 200 |
+| Post | postDispute | /api/v1/disputes | No | Add a dispute to database | Objects (object = Dispute) |
+| Patch | updateDispute | /api/v1/disputes/:id | No | Update dispute in database, especially for status | Objects (object = Dispute) |
 
 ### Emails:
 | Method | API Function Name | Endpoint | Protected | Usage | Response |
 | --- | --- | --- | --- | --- | --- |
-| Get | fetchEmail | /api/v1/email/dispute_id | No | Get a email by dispute id from the DB | (object = email) |
-| Post | postEmail | /api/v1/email | No | Add an email to database | Objects (object = email) |
+| Get | fetchEmailsByDisputeId | /api/v1/emails/:dispute_id | No | Get emails by dispute id from DB | (object = email[]) |
+| Post | postEmail | /api/v1/emails | No | Add an email to database | Objects (object = email) |

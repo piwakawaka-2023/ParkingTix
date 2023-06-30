@@ -4,8 +4,8 @@ import express from 'express'
 const router = express.Router()
 import * as db from '../db/emails'
 
-router.get('/:disputeId', async (req, res) => {
-  const id = +req.params.disputeId
+router.get('/:dispute_id', async (req, res) => {
+  const id = +req.params.dispute_id
   try {
     const emails = await db.getEmailsByDisputeId(id)
     res.json(emails)
