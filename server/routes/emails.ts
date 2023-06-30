@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
   const email = req.body
   try {
     const newEmail = await db.addEmail(email)
-    res.json(newEmail)
+    res.json(newEmail[0])
   } catch (err) {
     res.sendStatus(500)
   }

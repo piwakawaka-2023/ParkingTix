@@ -28,7 +28,18 @@ router.post('/', async (req, res) => {
   const dispute = req.body
   try {
     const newDispute = await db.addDispute(dispute)
-    res.json(newDispute)
+    res.json(newDispute[0])
+  } catch (err) {
+    res.sendStatus(500)
+  }
+})
+
+router.patch('/:id', async (req, res) => {
+  const id = +req.params.id
+  const dispute = req.body
+  try {
+    const newDispute = await db.updateDispute(id, dispute)
+    res.json(newDispute[0])
   } catch (err) {
     res.sendStatus(500)
   }
