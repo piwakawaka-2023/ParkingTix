@@ -1,12 +1,15 @@
 import express from 'express'
 import request from 'superagent'
 
-import 'dotenv/config'
+import path from 'path'
+import dotenv from 'dotenv'
+const envPath = path.join(__dirname, '../../.env')
+dotenv.config({ path: envPath })
 
 const router = express.Router()
 
 router.post('/emailresponse', (req, res) => {
-  // const prompt =  req.body
+  const prompt = req.body.prompt
 
   request
     .post('https://api.openai.com/v1/chat/completions')
@@ -17,7 +20,7 @@ router.post('/emailresponse', (req, res) => {
       messages: [
         {
           role: 'user',
-          content: `Hi how are you`,
+          content: `${prompt}`,
         },
       ],
       temperature: 0.7,
