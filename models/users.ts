@@ -13,6 +13,7 @@ export interface New {
 }
 
 export interface Update {
+  id: number
   name?: string
   profile_image?: string
   email?: string

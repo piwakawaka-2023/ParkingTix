@@ -1,6 +1,6 @@
 import type { ThunkAction } from '../store'
 import * as UserModels from '../../models/users'
-// import { fetchUsers, deleteUsers, postUsers } from '../apis/users' (MAKE API FOR USERS)
+import * as api from '../apis/users'
 import { useParams } from 'react-router-dom'
 
 // * SIMPLE ACTIONS
@@ -12,13 +12,13 @@ export const UPD_USER = 'UPD_USER'
 export const ERROR = 'ERROR'
 
 export type Action =
-  | { type: typeof SET_USER; payload: UserModels.UserObj[] }
+  | { type: typeof SET_USER; payload: UserModels.UserObj }
   | { type: typeof ADD_USER; payload: UserModels.New }
   | { type: typeof DEL_USER; payload: number }
-  | { type: typeof UPD_USER; payload: string }
+  | { type: typeof UPD_USER; payload: UserModels.Update }
   | { type: typeof ERROR; payload: string }
 
-export function setUser(user: UserModels.UserObj[]): Action {
+export function setUser(user: UserModels.UserObj): Action {
   return {
     type: SET_USER,
     payload: user,
@@ -39,11 +39,10 @@ export function addUser(users: UserModels.New): Action {
   }
 }
 
-export function updateUser(user: UserModels.UserObj): Action {
-  const { name, email, profile_image } = user
+export function updateUser(user: UserModels.Update): Action {
   return {
     type: UPD_USER,
-    payload: { name, email, profile_image },
+    payload: user,
   }
 }
 
@@ -56,12 +55,12 @@ export function error(message: string): Action {
 
 // * THUNKS
 
-export function getUser(): ThunkAction {
+export function getUser(userId: number): ThunkAction {
   return async (dispatch) => {
     try {
       // call the api function, which will access our server and db
       // and will return an array of movies
-      const userArr = await api.fetchUser()
+      const userArr = await api.fetchUser(userId)
 
       // with that moviesArr, we want to dispatch the simple action
       // which is the action that tells the reducer to update store
@@ -86,7 +85,7 @@ export function deleteUserThunk(id: number): ThunkAction {
 export function addUserThunk(user: UserModels.New): ThunkAction {
   return async (dispatch) => {
     try {
-      const newUser = await api.postUser(user)
+      const newUser = (await api.postUser(user)) as UserModels.New
       dispatch(addUser(newUser))
     } catch (err) {
       console.error('oh no, Go BACK', err)
@@ -94,11 +93,14 @@ export function addUserThunk(user: UserModels.New): ThunkAction {
   }
 }
 
-export function updateUserThunk(user: UserModels.UserObj): ThunkAction {
+export function updateUserThunk(
+  id: number,
+  newUser: UserModels.Update
+): ThunkAction {
   return async (dispatch) => {
     try {
-      await api.patchUser(user)
-      dispatch(updateUser(user))
+      await api.patchUser(id, newUser)
+      dispatch(updateUser(newUser))
     } catch (err) {
       console.error('oh no, It did not update', err)
     }
