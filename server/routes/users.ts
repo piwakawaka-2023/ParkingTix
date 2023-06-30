@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
   const userData = req.body
   try {
     const newUser = await db.addUser(userData)
-    res.json(newUser)
+    res.json(newUser[0])
   } catch (err) {
     res.sendStatus(500)
   }

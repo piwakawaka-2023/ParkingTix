@@ -8,7 +8,7 @@ export function getUserById(id: number) {
 }
 
 export function addUser(newUser: UserModels.New) {
-  return db('users').insert(newUser)
+  return db('users').insert(newUser).returning('*')
 }
 
 export function updateUser(id: number, newUser: UserModels.Update) {
