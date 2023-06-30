@@ -4,9 +4,10 @@
 SET_DISPUTES
 DEL_DISPUTE
 ADD_DISPUTE
+UPD_DISPUTE
 
 ### Reducers Disputes:
-disputesReducer()
+disputesReducers()
 
 ### Actions Users:
 SET_USERS
@@ -15,14 +16,14 @@ ADD_USER
 UPD_USER
 
 ### Reducers Users:
-usersReducer()
+usersReducers()
 
 ### Actions Emails:
 SET_EMAILS
 ADD_EMAIL
 
 ### Reducers Emails:
-emailsReducer()
+emailsReducers()
 
 # Thunk Actions:
 
@@ -30,7 +31,6 @@ emailsReducer()
 
 ### OpenAI api:
 GENERATE_EMAIL
-GENERATE_RESPONSE
 
 ### Gmail api:
 GET_INBOX
@@ -48,6 +48,7 @@ UPD_USER
 GET_DISPUTES
 DEL_DISPUTE
 ADD_DISPUTE
+UPD_DISPUTE
 
 ### Actions Emails:
 GET_EMAILS

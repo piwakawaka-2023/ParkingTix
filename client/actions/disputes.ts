@@ -8,22 +8,23 @@
 //*   Imports
 //* ----------------------------- *//
 import type { ThunkAction } from '../store'
-import * as Models from '../../models/disputes' // DisputeObj, New, Update
-import { fetchDisputes, deleteDispute, postDispute } from '../apis/disputes'
-import { useParams } from 'react-router-dom'
+import * as DisputeModels from '../../models/disputes' // DisputeObj, New, Update
+import * as api from '../apis/disputes'
 
 //* ----------------------------- *//
 //*   Variables
 //* ----------------------------- *//
 export const SET_DISPUTES = 'SET_DISPUTES'
-export const ADD_DISPUTES = 'ADD_DISPUTES'
-export const DEL_DISPUTES = 'DEL_DISPUTES'
+export const ADD_DISPUTE = 'ADD_DISPUTE'
+export const DEL_DISPUTE = 'DEL_DISPUTE'
+export const UPD_DISPUTE = 'UPD_DISPUTE'
 export const ERROR = 'ERROR'
 
 export type Action =
-  | { type: typeof SET_DISPUTES; payload: Models.DisputeObj[] }
-  | { type: typeof ADD_DISPUTES; payload: Models.New }
-  | { type: typeof DEL_DISPUTES; payload: number }
+  | { type: typeof SET_DISPUTES; payload: DisputeModels.DisputeObj[] }
+  | { type: typeof ADD_DISPUTE; payload: DisputeModels.DisputeObj }
+  | { type: typeof DEL_DISPUTE; payload: number }
+  | { type: typeof UPD_DISPUTE; payload: DisputeModels.DisputeObj }
   | { type: typeof ERROR; payload: string }
 
 //* ----------------------------- *//
@@ -31,7 +32,7 @@ export type Action =
 //* ----------------------------- *//
 
 //* Set Dispute Action
-export function setDisputes(disputes: Models.DisputeObj[]): Action {
+export function setDisputes(disputes: DisputeModels.DisputeObj[]): Action {
   return {
     type: SET_DISPUTES,
     payload: disputes,
@@ -41,15 +42,23 @@ export function setDisputes(disputes: Models.DisputeObj[]): Action {
 //* Delete Dispute Action
 export function delDispute(id: number): Action {
   return {
-    type: DEL_DISPUTES,
+    type: DEL_DISPUTE,
     payload: id,
   }
 }
 
 //* Add Dispute Action
-export function addDispute(dispute: Models.New): Action {
+export function addDispute(dispute: DisputeModels.DisputeObj): Action {
   return {
-    type: ADD_DISPUTES,
+    type: ADD_DISPUTE,
+    payload: dispute,
+  }
+}
+
+//* Update Dispute Action
+export function updateDispute(dispute: DisputeModels.DisputeObj): Action {
+  return {
+    type: ADD_DISPUTE,
     payload: dispute,
   }
 }
@@ -62,12 +71,15 @@ export function error(message: string): Action {
   }
 }
 
-//* Get Dispute Thunk
-export function getDisputes(): ThunkAction {
-  const user = useParams.userId
+//--------------
+// Thunkie Bois
+//--------------
+
+//* Get Disputes Thunk
+export function getDisputes(userId: number): ThunkAction {
   return async (dispatch) => {
     try {
-      const disputesArr = await fetchDisputes(user)
+      const disputesArr = await api.fetchDisputes(userId)
       dispatch(setDisputes(disputesArr))
     } catch (err) {
       dispatch(error(String(err)))
@@ -79,7 +91,7 @@ export function getDisputes(): ThunkAction {
 export function deleteDisputeThunk(id: number): ThunkAction {
   return async (dispatch) => {
     try {
-      await deleteDispute(id)
+      await api.deleteDispute(id)
       dispatch(delDispute(id))
     } catch (err) {
       dispatch(error(String(err)))
@@ -88,11 +100,26 @@ export function deleteDisputeThunk(id: number): ThunkAction {
 }
 
 //* Add Dispute Thunk
-export function addDisputeThunk(dispute: Models.New): ThunkAction {
+export function addDisputeThunk(dispute: DisputeModels.New): ThunkAction {
   return async (dispatch) => {
     try {
-      const disputeData = await postDispute(dispute)
+      const disputeData = await api.postDispute(dispute)
       dispatch(addDispute(disputeData))
+    } catch (err) {
+      dispatch(error(String(err)))
+    }
+  }
+}
+
+//* Update Dispute Thunk
+export function updateDisputeThunk(
+  id: number,
+  dispute: DisputeModels.Update
+): ThunkAction {
+  return async (dispatch) => {
+    try {
+      const disputeData = await api.updateDispute(id, dispute)
+      dispatch(updateDispute(disputeData))
     } catch (err) {
       dispatch(error(String(err)))
     }
