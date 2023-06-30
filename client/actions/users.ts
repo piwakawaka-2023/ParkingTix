@@ -1,7 +1,6 @@
 import type { ThunkAction } from '../store'
 import * as UserModels from '../../models/users'
 import * as api from '../apis/users'
-import { useParams } from 'react-router-dom'
 
 // * SIMPLE ACTIONS
 
@@ -59,12 +58,9 @@ export function getUser(userId: number): ThunkAction {
   return async (dispatch) => {
     try {
       // call the api function, which will access our server and db
-      // and will return an array of movies
-      const userArr = await api.fetchUser(userId)
-
-      // with that moviesArr, we want to dispatch the simple action
-      // which is the action that tells the reducer to update store
-      dispatch(setUser(userArr))
+      // and will return the user that matches the given id
+      const user = await api.fetchUser(userId)
+      dispatch(setUser(user))
     } catch (err) {
       console.error('oh oh, action bad', err)
     }

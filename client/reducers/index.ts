@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux'
 
+import userReducers from './users'
 import disputeReducers from './disputes'
 
-import userReducer from './users'
+const users = userReducers
+const disputes = disputeReducers
 
 export default combineReducers({
-  disputeReducers,
-  userReducer,
-
+  users,
+  disputes,
 })

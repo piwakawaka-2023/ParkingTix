@@ -10,7 +10,7 @@ import {
 
 const initialState = [] as Models.UserObj[]
 
-export default function userReducer(state = initialState, action: Action) {
+export default function userReducers(state = initialState, action: Action) {
   const { type, payload } = action
   switch (type) {
     case SET_USER:
