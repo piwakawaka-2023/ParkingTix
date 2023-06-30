@@ -8,7 +8,7 @@ dotenv.config({ path: envPath })
 
 const router = express.Router()
 
-router.post('/emailresponse', (req, res) => {
+router.post('/', (req, res) => {
   const prompt = req.body.prompt
 
   request
