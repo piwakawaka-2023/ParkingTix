@@ -10,9 +10,9 @@ function Dispute(props: Props) {
   return (
     <>
       <div>
-        <h1>{dispute.date_issued}</h1>
-        <h2>Infringement Number:{dispute.infringement}</h2>
-        <h2>Registration Number:{dispute.registration}</h2>
+        <h3>{dispute.date_issued}</h3>
+        <h3>Infringement Number:{dispute.infringement}</h3>
+        <h3>Registration Number:{dispute.registration}</h3>
         <p>Time issued:{dispute.time_issued}</p>
         <p>Location:{dispute.location}</p>
         <p>Amount Due: ${dispute.amount}</p>
