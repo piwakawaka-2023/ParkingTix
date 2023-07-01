@@ -1,6 +1,6 @@
 import type { ThunkAction } from '../store'
 import * as EmailModels from '../../models/emails'
-import * as api from '../apis/users'
+import * as api from '../apis/emails'
 
 // * SIMPLE ACTIONS
 
@@ -9,14 +9,14 @@ export const ADD_EMAIL = 'ADD_EMAIL'
 export const ERROR = 'ERROR'
 
 export type Action =
-  | { type: typeof SET_EMAILS; payload: EmailModels.EmailObj }
+  | { type: typeof SET_EMAILS; payload: EmailModels.EmailObj[] }
   | { type: typeof ADD_EMAIL; payload: EmailModels.EmailObj }
   | { type: typeof ERROR; payload: string }
 
-export function setEmail(email: EmailModels.EmailObj): Action {
+export function setEmails(emails: EmailModels.EmailObj[]): Action {
   return {
     type: SET_EMAILS,
-    payload: email,
+    payload: emails,
   }
 }
 
@@ -36,11 +36,12 @@ export function error(message: string): Action {
 
 // * THUNKS
 
-export function getEmail(emailId: number): ThunkAction {
+export function getEmails(disputeId: number): ThunkAction {
   return async (dispatch) => {
     try {
-      const email = await api.fetchEmailsByDisputeId(emailId)
-      dispatch(setEmail(email))
+      const emails = await api.fetchEmailsByDisputeId(disputeId)
+
+      dispatch(setEmails(emails))
     } catch (err) {
       dispatch(error(String(err)))
     }
