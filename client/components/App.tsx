@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useAppDispatch } from '../hooks/hooks'
 
-import AddDisputes from './AddDisputes'
+import AddDispute from './AddDispute'
 import DisputesList from './DisputesList'
 import Header from './Header'
 import Home from './Home'
@@ -33,7 +33,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/disputes" element={<DisputesList />} />
-          <Route path="/adddispute" element={<AddDisputes />} />
+          <Route path="/disputes/add" element={<AddDispute />} />
         </Routes>
       </section>
     </>
