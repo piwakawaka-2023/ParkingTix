@@ -31,3 +31,4 @@ export async function patchUser(
 export async function deleteUser(id: number) {
   await request.delete(`${userUrl}/${id}`)
 }
+
