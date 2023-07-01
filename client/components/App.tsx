@@ -8,6 +8,8 @@ import Header from './Header'
 import Home from './Home'
 import Nav from './Nav'
 import { getUser } from '../actions/users'
+import { getDisputes } from '../actions/disputes'
+// import { getDisputes } from '../actions/disputes'
 
 // Temp/hardcoded user id of 1. This will change when we get Auth0 set up
 const userId = 1
@@ -17,6 +19,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getUser(userId))
+    dispatch(getDisputes(userId))
   }, [dispatch])
 
   return (

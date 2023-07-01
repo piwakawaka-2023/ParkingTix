@@ -7,22 +7,23 @@
 //* ----------------------------- *//
 //*   Imports
 //* ----------------------------- *//
-import type * as Models from '../../models/disputes'
+import type * as DisputeModels from '../../models/disputes'
 import {
   ERROR,
   SET_DISPUTES,
-  DEL_DISPUTES,
-  ADD_DISPUTES,
+  DEL_DISPUTE,
+  ADD_DISPUTE,
+  // UPD_DISPUTE,
 } from '../actions/disputes'
 
 //* ----------------------------- *//
 //*   Variables
 //* ----------------------------- *//
-const initialState = [] as Models.DisputeObj[]
+const initialState = [] as DisputeModels.DisputeObj[]
 export type Action =
-  | { type: typeof SET_DISPUTES; payload: Models.DisputeObj[] }
-  | { type: typeof ADD_DISPUTES; payload: Models.New }
-  | { type: typeof DEL_DISPUTES; payload: number }
+  | { type: typeof SET_DISPUTES; payload: DisputeModels.DisputeObj[] }
+  | { type: typeof ADD_DISPUTE; payload: DisputeModels.New }
+  | { type: typeof DEL_DISPUTE; payload: number }
   | { type: typeof ERROR; payload: string }
 
 //* ----------------------------- *//
@@ -34,10 +35,10 @@ export default function disputeReducers(state = initialState, action: Action) {
     case SET_DISPUTES:
       return payload
 
-    case DEL_DISPUTES:
+    case DEL_DISPUTE:
       return state.filter((dispute) => dispute.id !== payload)
 
-    case ADD_DISPUTES:
+    case ADD_DISPUTE:
       return [...state, payload]
 
     case ERROR:
