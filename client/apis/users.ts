@@ -19,8 +19,13 @@ export async function postUser(
   return newUserFromDb
 }
 
-export async function patchUser(id: number, newUser: UserModels.Update) {
-  await request.patch(`${userUrl}/${id}`).send({ user: newUser })
+export async function patchUser(
+  id: number,
+  newUser: UserModels.Update
+): Promise<UserModels.UserObj> {
+  const res = await request.patch(`${userUrl}/${id}`).send({ user: newUser })
+  const newUserFromDb = res.body
+  return newUserFromDb
 }
 
 export async function deleteUser(id: number) {

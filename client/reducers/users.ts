@@ -27,7 +27,7 @@ export default function userReducers(state = initialState, action: Action) {
     case UPD_USER:
       return state.map((user) => {
         if (user.id === payload.id) {
-          return { ...user }
+          return { payload }
         }
         return user
       })

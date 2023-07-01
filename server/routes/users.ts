@@ -39,7 +39,7 @@ router.patch('/:id', async (req, res) => {
   const userEdit = req.body
   try {
     const newUser = await db.updateUser(id, userEdit)
-    res.json(newUser[0])
+    res.json(newUser)
   } catch (err) {
     res.sendStatus(500)
   }
