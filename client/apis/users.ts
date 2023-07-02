@@ -47,7 +47,7 @@ export async function patchUser(
 
 export async function deleteUser(
   id: number,
-  toke: string //auth
+  token: string //auth
 ) {
   await request
     .delete(`${userUrl}/${id}`)

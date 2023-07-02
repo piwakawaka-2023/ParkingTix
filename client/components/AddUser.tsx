@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 import * as UserModels from '../../models/users'
 import { useAppDispatch } from '../hooks/hooks'
 import * as actions from '../actions/users'
+import { useAuth0 } from '@auth0/auth0-react'
 
 import '../client_utils/form-utils'
 
@@ -11,6 +12,7 @@ import { Link } from 'react-router-dom'
 
 function AddUser() {
   const dispatch = useAppDispatch()
+  const { getAccessTokenSilently } = useAuth0() //auth
 
   const [formData, setFormData] = useState({} as UserModels.New)
   const [formVisible, setFormVisible] = useState(true)
@@ -19,11 +21,12 @@ function AddUser() {
     setFormData({ ...formData, [evt.target.name]: evt.target.value })
   }
 
-  const handleSubmit = (evt: FormEvent) => {
+  const handleSubmit = async (evt: FormEvent) => {
     evt.preventDefault()
+    const token = await getAccessTokenSilently()
     // check everything is there, if not send alert
     if (checkNewUserForm(formData)) {
-      dispatch(actions.addUserThunk(formData))
+      dispatch(actions.addUserThunk(formData, token))
       setFormVisible(false)
     } else {
       alert('Please fill in all required fields')

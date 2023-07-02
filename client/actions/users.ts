@@ -1,6 +1,9 @@
 import type { ThunkAction } from '../store'
 import * as UserModels from '../../models/users'
 import * as api from '../apis/users'
+import { useAuth0 } from '@auth0/auth0-react'
+
+const authToken = 'this is the token' // destructure this from the auth0 object somehow
 
 // * SIMPLE ACTIONS
 
@@ -54,12 +57,12 @@ export function error(message: string): Action {
 
 // * THUNKS
 
-export function getUser(userId: number): ThunkAction {
+export function getUser(userId: number, token = authToken): ThunkAction {
   return async (dispatch) => {
     try {
       // call the api function, which will access our server and db
       // and will return the user that matches the given id
-      const user = await api.fetchUser(userId)
+      const user = await api.fetchUser(userId, token )
       dispatch(setUser(user))
     } catch (err) {
       dispatch(error(String(err)))
@@ -67,10 +70,11 @@ export function getUser(userId: number): ThunkAction {
   }
 }
 
-export function deleteUserThunk(id: number): ThunkAction {
+export function deleteUserThunk(id: number, token:string //auth
+  ): ThunkAction {
   return async (dispatch) => {
     try {
-      await api.deleteUser(id) //go to api -> which heads to back end, updates db
+      await api.deleteUser(id, token) //go to api -> which heads to back end, updates db
       dispatch(delUser(id)) // dispatches the simple action -> reducer change state
     } catch (err) {
       dispatch(error(String(err)))
@@ -78,10 +82,10 @@ export function deleteUserThunk(id: number): ThunkAction {
   }
 }
 
-export function addUserThunk(user: UserModels.New): ThunkAction {
+export function addUserThunk(user: UserModels.New, token:string): ThunkAction {
   return async (dispatch) => {
     try {
-      const newUser = await api.postUser(user)
+      const newUser = await api.postUser(user, token )
       dispatch(addUser(newUser))
     } catch (err) {
       dispatch(error(String(err)))
@@ -91,11 +95,11 @@ export function addUserThunk(user: UserModels.New): ThunkAction {
 
 export function updateUserThunk(
   id: number,
-  user: UserModels.Update
+  user: UserModels.Update, token:string
 ): ThunkAction {
   return async (dispatch) => {
     try {
-      const newUser = await api.patchUser(id, user)
+      const newUser = await api.patchUser(id, user, token)
       dispatch(updateUser(newUser))
     } catch (err) {
       dispatch(error(String(err)))
