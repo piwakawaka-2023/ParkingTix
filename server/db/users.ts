@@ -3,6 +3,10 @@ import * as UserModels from '../../models/users'
 
 const db = connection
 
+export function getAllUsers() {
+  return db('users').select()
+}
+
 export function getUserById(id: number) {
   return db('users').select().where({ id })
 }
@@ -12,13 +16,14 @@ export function addUser(newUser: UserModels.New) {
 }
 
 export function updateUser(id: number, newUser: UserModels.Update) {
-  const { name, profile_image, email } = newUser
+  const { f_name, l_name, profile_image, email } = newUser
   return db('users')
     .select()
     .where({ id })
     .first()
     .update({
-      name,
+      f_name,
+      l_name,
       profile_image,
       email,
     })

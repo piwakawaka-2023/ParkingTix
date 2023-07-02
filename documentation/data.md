@@ -23,7 +23,8 @@ UserModels.Update
 UserData {
   id: number
   created_at: number
-  name: string
+  f_name: string
+  l_name: string
   profile_image: string
   email: string
 }
@@ -55,6 +56,7 @@ Valid statuses:
   id: integer
   created_at: integer
   dispute_id: integer
+  user_id: integer
   content: string
 }
 ```

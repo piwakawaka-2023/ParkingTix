@@ -4,9 +4,10 @@
 SET_DISPUTES
 DEL_DISPUTE
 ADD_DISPUTE
+UPD_DISPUTE
 
 ### Reducers Disputes:
-disputesReducer()
+disputesReducers()
 
 ### Actions Users:
 SET_USERS
@@ -15,22 +16,30 @@ ADD_USER
 UPD_USER
 
 ### Reducers Users:
-usersReducer()
+usersReducers()
 
 ### Actions Emails:
 SET_EMAILS
 ADD_EMAIL
 
 ### Reducers Emails:
-emailsReducer()
+emailsReducers()
 
 # Thunk Actions:
 
 ## External apis:
 
 ### OpenAI api:
+Each of these actions will send different text prompts (and take different input) to the gpt api;
+- 'Generate Email' is for the first email when a dispute is initiated
+- 'Generate Response' is for replying to responses from the council
+- 'Generate Resolution' is for sending a thankyou email if the fine is waived
+- 'Generate Concession' is for sending an email to concede, and saying you'll pay the fine
+
 GENERATE_EMAIL
 GENERATE_RESPONSE
+GENERATE_RESOLUTION
+GENERATE_CONCESSION
 
 ### Gmail api:
 GET_INBOX
@@ -48,6 +57,7 @@ UPD_USER
 GET_DISPUTES
 DEL_DISPUTE
 ADD_DISPUTE
+UPD_DISPUTE
 
 ### Actions Emails:
 GET_EMAILS

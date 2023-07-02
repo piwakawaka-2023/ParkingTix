@@ -3,7 +3,7 @@ import * as DisputeModels from '../../models/disputes'
 
 const disputesUrl = '/api/v1/disputes'
 
-// fetch users by user id
+// fetch disputes by user id
 export async function fetchDisputes(
   userId: number
 ): Promise<DisputeModels.DisputeObj[]> {
@@ -16,6 +16,14 @@ export async function postDispute(
   newDispute: DisputeModels.New
 ): Promise<DisputeModels.DisputeObj> {
   const res = await request.post(disputesUrl).send(newDispute)
+  const newDisputeFromDb = res.body
+  return newDisputeFromDb
+}
+
+export async function updateDispute(id: number,
+  newDispute: DisputeModels.Update
+): Promise<DisputeModels.DisputeObj> {
+  const res = await request.patch(`${disputesUrl}/${id}`).send(newDispute)
   const newDisputeFromDb = res.body
   return newDisputeFromDb
 }
