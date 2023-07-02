@@ -4,13 +4,15 @@ import DisputesList from './DisputesList'
 import Header from './Header'
 import Home from './Home'
 import Nav from './Nav'
+import { CssBaseline } from '@mui/material'
 
 function App() {
   return (
     <>
-      <header className="header">
+      <CssBaseline />
+      {/* <header className="header">
         <h1>Parking • Tix </h1>
-      </header>
+      </header> */}
       <section className="main">
         <Header />
         <Nav />
