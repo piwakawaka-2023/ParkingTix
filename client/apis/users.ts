@@ -3,7 +3,11 @@ import * as UserModels from '../../models/users'
 
 const userUrl = '/api/v1/users'
 
-//fetch user by userId
+export async function fetchAllUsers(): Promise<UserModels.UserObj> {
+  const res = await request.get(userUrl)
+  const users = res.body
+  return users
+}
 
 export async function fetchUser(userId: number): Promise<UserModels.UserObj> {
   const res = await request.get(`${userUrl}/${userId}`)

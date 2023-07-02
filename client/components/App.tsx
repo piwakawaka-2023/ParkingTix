@@ -1,27 +1,19 @@
 import { Route, Routes } from 'react-router-dom'
-import { useEffect } from 'react'
-import { useAppDispatch } from '../hooks/hooks'
 
 import AddDispute from './AddDispute'
+import AddUser from './AddUser'
 import DisputesList from './DisputesList'
 import Header from './Header'
 import Home from './Home'
 import Nav from './Nav'
-import { getUser } from '../actions/users'
-import { getDisputes } from '../actions/disputes'
-import { getEmails } from '../actions/emails'
 
 // Temp/hardcoded user id of 1. This will change when we get Auth0 set up
 export const userId = 1
 
 function App() {
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    dispatch(getUser(userId))
-    dispatch(getDisputes(userId))
-    dispatch(getEmails(userId))
-  }, [dispatch])
+  
+  // Authenticated/Not Authenticated thingies go in this component
+  // Db called to get user data from Home component once authenticated
 
   return (
     <>
@@ -33,6 +25,7 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<AddUser />} />
           <Route path="/disputes" element={<DisputesList />} />
           <Route path="/disputes/add" element={<AddDispute />} />
         </Routes>

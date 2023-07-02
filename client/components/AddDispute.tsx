@@ -1,17 +1,22 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import * as DisputeModels from '../../models/disputes'
-import { useAppDispatch } from '../hooks/hooks'
+import * as UserModels from '../../models/users'
+import { useAppSelector, useAppDispatch } from '../hooks/hooks'
 import * as actions from '../actions/disputes'
 
-import '../client_utils/form_utils'
+import '../client_utils/form-utils'
 
 // Temp/hardcoded user id, will change when auth0 implemented
-import { userId } from './App'
-import checkNewDisputeForm from '../client_utils/form_utils'
+// import { userId } from './App'
+
+import { checkNewDisputeForm } from '../client_utils/form-utils'
 import { Link } from 'react-router-dom'
 
 function AddDisputes() {
   const dispatch = useAppDispatch()
+  const user = useAppSelector((state) => state.users) as UserModels.UserObj[]
+
+  const userId = user[0].id
 
   const [formData, setFormData] = useState({
     user_id: userId,
@@ -38,11 +43,11 @@ function AddDisputes() {
     <>
       {formVisible && (
         <div className="form-container">
-          <form className="add-dispute-form" onSubmit={handleSubmit}>
+          <form className="form" onSubmit={handleSubmit}>
             <label htmlFor="dateIssued">Date issued:</label>
             <input
               type="date"
-              id="DateIssued"
+              id="dateIssued"
               name="date_issued"
               onChange={handleChange}
             />

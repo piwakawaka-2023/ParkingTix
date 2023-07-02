@@ -4,6 +4,15 @@ import express from 'express'
 const router = express.Router()
 import * as db from '../db/users'
 
+router.get('/', async (req, res) => {
+  try {
+    const users = await db.getAllUsers()
+    res.json(users)
+  } catch (error) {
+    res.sendStatus(500)
+  }
+})
+
 router.get('/:id', async (req, res) => {
   const id = +req.params.id
   try {
