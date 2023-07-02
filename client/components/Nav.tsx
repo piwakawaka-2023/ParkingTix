@@ -95,23 +95,6 @@ function Nav() {
         </Typography>
 
         <Stack direction="row" spacing={2}>
-          <Button color="inherit">
-            <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
-              Home
-            </Link>
-          </Button>
-          <Link
-            to="/disputes"
-            style={{ textDecoration: 'none', color: 'white' }}
-          >
-            <Button color="inherit">Disputes</Button>
-          </Link>
-          <Link
-            to="/disputes/add"
-            style={{ textDecoration: 'none', color: 'white' }}
-          >
-            <Button color="inherit">Dispute your tix</Button>
-          </Link>
           <IfNotAuthenticated>
             <Button variant="outlined" color="inherit" onClick={handleSignIn}>
               Login
@@ -120,6 +103,23 @@ function Nav() {
         </Stack>
         <IfAuthenticated>
           <>
+            <Button color="inherit">
+              <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+                Home
+              </Link>
+            </Button>
+            <Link
+              to="/disputes"
+              style={{ textDecoration: 'none', color: 'white' }}
+            >
+              <Button color="inherit">Disputes</Button>
+            </Link>
+            <Link
+              to="/disputes/add"
+              style={{ textDecoration: 'none', color: 'white' }}
+            >
+              <Button color="inherit">Dispute your tix</Button>
+            </Link>
             {console.log(user)}
             <IconButton
               size="large"
