@@ -12,7 +12,7 @@ import { getDisputes } from '../actions/disputes'
 import { getEmails } from '../actions/emails'
 
 // Temp/hardcoded user id of 1. This will change when we get Auth0 set up
-const userId = 1
+export const userId = 1
 
 function App() {
   const dispatch = useAppDispatch()

@@ -7,10 +7,12 @@ function DisputesList() {
     (state) => state.disputes
   ) as DisputeModels.DisputeObj[]
 
+  const newestFirst = disputesArr.reverse()
+
   return (
     <>
       <div>
-        {disputesArr.map((dispute) => (
+        {newestFirst.map((dispute) => (
           <Dispute key={dispute.id} dispute={dispute} />
         ))}
       </div>

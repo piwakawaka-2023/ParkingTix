@@ -11,7 +11,7 @@ function Nav() {
           <Link to="/disputes">Go to Disputes</Link>
         </li>
         <li>
-          <Link to="/adddispute">Add Disputes</Link>
+          <Link to="/disputes/add">Add Disputes</Link>
         </li>
       </ul>
     </>
