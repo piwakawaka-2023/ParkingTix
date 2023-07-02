@@ -48,7 +48,7 @@ function Nav() {
             <Button color="inherit">Disputes</Button>
           </Link>
           <Link
-            to="/adddispute"
+            to="/disputes/add"
             style={{ textDecoration: 'none', color: 'white' }}
           >
             <Button color="inherit">Dispute your tix</Button>
