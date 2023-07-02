@@ -7,15 +7,11 @@ body {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-.add-dispute-form {
+.form {
   max-width: 400px;
   display: flex;
   flex-direction: column;
   align-items: left;
   justify-content: center;
   padding: 20px;
-}
-
-#infringement {
-  -webkit-appearance: none;
 }

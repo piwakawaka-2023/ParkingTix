@@ -5,7 +5,8 @@
 #### USERS
 | Method | API Function Name | Endpoint | Protected | Usage | Response |
 | --- | --- | --- | --- | --- | --- |
-| Get | fetchUser | /api/v1/users/:id | No | Get a list of user information from the DB | Objects (object = User) |
+| Get | fetchAllUsers | /api/v1/users | No | Get a list of all users from the DB | Objects (object = User) |
+| Get | fetchUser | /api/v1/users/:id | No | Get information of a single user from the DB | Objects (object = User) |
 | Delete | deleteUser | /api/v1/users/:id | No | Delete a user from the DB | id |
 | Post | postUser | /api/v1/users | No | Add a user to database | Objects (object = User) |
 | Patch | patchUser | /api/v1/users/:id | No | Update user information send status | status(200) |
