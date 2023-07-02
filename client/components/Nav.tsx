@@ -12,10 +12,13 @@ import {
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong'
 import { useState } from 'react'
 import { AccountCircle } from '@mui/icons-material'
+import { useAuth0 } from '@auth0/auth0-react'
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
 function Nav() {
   const [auth, setAuth] = useState(false)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const { user, logout, loginWithRedirect } = useAuth0()
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -23,6 +26,14 @@ function Nav() {
 
   const handleClose = () => {
     setAnchorEl(null)
+  }
+
+  const handleSignOut = () => {
+    logout()
+  }
+
+  const handleSignIn = () => {
+    loginWithRedirect()
   }
 
   return (
@@ -53,13 +64,13 @@ function Nav() {
           >
             <Button color="inherit">Dispute your tix</Button>
           </Link>
-          {!auth && (
+          <IfNotAuthenticated>
             <Button variant="outlined" color="inherit">
               Login
             </Button>
-          )}
+          </IfNotAuthenticated>
         </Stack>
-        {auth && (
+        <IfAuthenticated>
           <>
             <IconButton
               size="large"
@@ -90,7 +101,7 @@ function Nav() {
               <MenuItem onClick={handleClose}>My account</MenuItem>
             </Menu>
           </>
-        )}
+        </IfAuthenticated>
       </Toolbar>
     </AppBar>
   )
