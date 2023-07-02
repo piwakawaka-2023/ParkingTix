@@ -43,7 +43,7 @@ function Nav() {
           <ReceiptLongIcon />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          ParkingTix
+          Parking<span className="span-logo">Tix</span>
         </Typography>
 
         <Stack direction="row" spacing={2}>
