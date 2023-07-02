@@ -8,15 +8,63 @@ import {
   Button,
   MenuItem,
   Menu,
+  Avatar,
+  Box,
+  Divider,
 } from '@mui/material'
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong'
 import { useState } from 'react'
-import { AccountCircle } from '@mui/icons-material'
 import { useAuth0 } from '@auth0/auth0-react'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
+import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined'
+import { MenuProps } from '@mui/material/Menu'
+import { styled, alpha } from '@mui/material/styles'
+
+const StyledMenu = styled((props: MenuProps) => (
+  <Menu
+    elevation={0}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'right',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'right',
+    }}
+    {...props}
+  />
+))(({ theme }) => ({
+  '& .MuiPaper-root': {
+    borderRadius: 6,
+    marginTop: theme.spacing(1),
+    minWidth: 180,
+    color:
+      theme.palette.mode === 'light'
+        ? 'rgb(55, 65, 81)'
+        : theme.palette.grey[300],
+    boxShadow:
+      'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
+    '& .MuiMenu-list': {
+      padding: '4px 0',
+    },
+    '& .MuiMenuItem-root': {
+      '& .MuiSvgIcon-root': {
+        fontSize: 18,
+        color: theme.palette.text.secondary,
+        marginRight: theme.spacing(1.5),
+      },
+      '&:active': {
+        backgroundColor: alpha(
+          theme.palette.primary.main,
+          theme.palette.action.selectedOpacity
+        ),
+      },
+    },
+  },
+}))
 
 function Nav() {
-  const [auth, setAuth] = useState(false)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const { user, logout, loginWithRedirect } = useAuth0()
 
@@ -65,13 +113,14 @@ function Nav() {
             <Button color="inherit">Dispute your tix</Button>
           </Link>
           <IfNotAuthenticated>
-            <Button variant="outlined" color="inherit">
+            <Button variant="outlined" color="inherit" onClick={handleSignIn}>
               Login
             </Button>
           </IfNotAuthenticated>
         </Stack>
         <IfAuthenticated>
           <>
+            {console.log(user)}
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -80,9 +129,9 @@ function Nav() {
               onClick={handleMenu}
               color="inherit"
             >
-              <AccountCircle />
+              <Avatar src={user?.picture} />
             </IconButton>
-            <Menu
+            <StyledMenu
               id="menu-appbar"
               anchorEl={anchorEl}
               anchorOrigin={{
@@ -97,9 +146,23 @@ function Nav() {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-            </Menu>
+              <Box>
+                <Typography variant="body1">{user?.name}</Typography>
+                <Typography variant="subtitle1">{user?.email}</Typography>
+              </Box>
+              <Divider light />
+              <MenuItem onClick={handleClose}>
+                <PersonOutlineOutlinedIcon />
+                Profile
+              </MenuItem>
+              <Divider light />
+              <MenuItem onClick={handleClose}>
+                <TuneOutlinedIcon />
+                Settings
+              </MenuItem>
+              <Divider light />
+              <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
+            </StyledMenu>
           </>
         </IfAuthenticated>
       </Toolbar>
