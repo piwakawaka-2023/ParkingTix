@@ -21,5 +21,5 @@
 ### Emails:
 | Method | API Function Name | Endpoint | Protected | Usage | Response |
 | --- | --- | --- | --- | --- | --- |
-| Get | fetchEmailsByDisputeId | /api/v1/emails/:dispute_id | No | Get emails by dispute id from DB | (object = email[]) |
+| Get | fetchEmailsByUserId | /api/v1/emails/:user_id | No | Get emails by user id from DB | (object = email[]) |
 | Post | postEmail | /api/v1/emails | No | Add an email to database | Objects (object = email) |

@@ -4,7 +4,7 @@ import * as api from '../apis/emails'
 
 // * SIMPLE ACTIONS
 
-export const SET_EMAILS = 'SET_EMAIL'
+export const SET_EMAILS = 'SET_EMAILS'
 export const ADD_EMAIL = 'ADD_EMAIL'
 export const ERROR = 'ERROR'
 
@@ -36,11 +36,10 @@ export function error(message: string): Action {
 
 // * THUNKS
 
-export function getEmails(disputeId: number): ThunkAction {
+export function getEmails(userId: number): ThunkAction {
   return async (dispatch) => {
     try {
-      const emails = await api.fetchEmailsByDisputeId(disputeId)
-
+      const emails = await api.fetchEmailsByUserId(userId)
       dispatch(setEmails(emails))
     } catch (err) {
       dispatch(error(String(err)))
