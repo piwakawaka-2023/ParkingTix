@@ -4,15 +4,16 @@ import express from 'express'
 const router = express.Router()
 import * as db from '../db/emails'
 
-router.get('/:dispute_id', async (req, res) => {
-  const id = +req.params.dispute_id
+router.get('/:user_id', async (req, res) => {
+  const id = +req.params.user_id
   try {
-    const emails = await db.getEmailsByDisputeId(id)
+    const emails = await db.getEmailsByUserId(id)
     res.json(emails)
   } catch (error) {
     res.sendStatus(500)
   }
 })
+
 
 router.post('/', async (req, res) => {
   const email = req.body

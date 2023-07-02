@@ -55,6 +55,7 @@ Valid statuses:
   id: integer
   created_at: integer
   dispute_id: integer
+  user_id: integer
   content: string
 }
 ```
