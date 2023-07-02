@@ -11,12 +11,10 @@ import '../client_utils/form-utils'
 
 import { checkNewDisputeForm } from '../client_utils/form-utils'
 import { Link } from 'react-router-dom'
+import { userId } from './App'
 
 function AddDisputes() {
   const dispatch = useAppDispatch()
-  const user = useAppSelector((state) => state.users) as UserModels.UserObj[]
-
-  const userId = user[0].id
 
   const [formData, setFormData] = useState({
     user_id: userId,
