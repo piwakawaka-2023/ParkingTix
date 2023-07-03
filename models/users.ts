@@ -5,6 +5,7 @@ export interface UserObj {
   created_at: number
   profile_image: string | null
   email: string
+  auth0_id: string
 }
 
 export interface New {
@@ -12,6 +13,7 @@ export interface New {
   l_name: string
   profile_image?: string
   email: string
+  auth0_id: string
 }
 
 export interface Update {
@@ -20,5 +22,5 @@ export interface Update {
   l_name?: string
   profile_image?: string
   email?: string
+  auth0_id?: string
 }
-

@@ -1,5 +1,5 @@
 const {google} = require('googleapis');
-// import { Email } from "../../models/google";
+import { Email } from "../../models/google";
 
 const oauth2Client = new google.auth.OAuth2(
   "607422315781-dlrhdddnoefbe9o5h6725p57oj951o24.apps.googleusercontent.com",
@@ -23,12 +23,18 @@ export async function getToken(code) {
   let {tokens} = await oauth2Client.getToken(code)
   oauth2Client.setCredentials(tokens)
 
-  return tokens.refresh_token ? tokens.refresh_token : ''
-
-  console.log(tokens)
-  // console.log(await getMail())
+  console.log(await getMail())
+  // console.log(await getMessagesByThread('1891593d4c7bb4e9'))
+  console.log(await getMessagesByThread('1890939e20501d5c'))
   // console.log('ONE',await getMessageContent('18909c5cd7bdf8c8'))
   // console.log('ONE',await getMessageContent('18908fb1eaa720a7'))
+  // console.log(tokens)
+}
+
+export async function setRefreshToken(refToken) {
+  oauth2Client.setCredentials({
+    refresh_token: refToken
+  })
 }
 
 export async function sendMail(email: Email) {
@@ -122,10 +128,15 @@ export async function getProfile() {
 
 export async function getMessagesByThread(threadId: string) {
   const gmail = google.gmail({version: 'v1', auth: oauth2Client})
-  const messages = await gmail.users.messages.list({
+  const messages = await gmail.users.threads.get({
     userId: 'me',
-    q: `threadId: ${threadId}`
+    id: '18918773662fbcbe'
   })
 
-  return messages.data.messages
+  const messagePartArr = messages.data.messages
+  const messagesBody = messagePartArr.map((message) => {
+    return findTextBody(message.payload)
+  })
+
+  return messagesBody
 }
