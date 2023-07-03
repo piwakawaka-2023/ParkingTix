@@ -14,6 +14,16 @@ router.get('/:user_id', async (req, res) => {
   }
 })
 
+router.get('/threads/:id', async (req, res) => {
+  const id = +req.params.id
+  try {
+    const emails = await db.getEmailsByDisputeId(id)
+    res.json(emails)
+  } catch (error) {
+    res.sendStatus(500)
+  }
+})
+
 
 router.post('/', async (req, res) => {
   const email = req.body

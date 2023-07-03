@@ -40,6 +40,16 @@ export async function deleteDispute(id: number,token:string //auth
 
 }
 
+// fetch dispute with user information
+export async function fetchDisputeUserDetails(
+  disputeId: number
+): Promise<DisputeModels.DisputeUserDetails> {
+  const res = await request.get(`${disputesUrl}/details/${disputeId}`)
+  const dispute = res.body
+  return dispute
+}
+
+
 // function logError(err: Error) {
 //   if (err.message === 'Username Taken') {
 //     throw new Error('Username already taken - please choose another')

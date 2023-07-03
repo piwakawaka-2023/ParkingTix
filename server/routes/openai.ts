@@ -20,13 +20,17 @@ router.post('/', (req, res) => {
       messages: [
         {
           role: 'user',
+          content: `Write an email to the Wellington City Council (New Zealand) to appeal a parking ticket. The ticket details will be sent in my next message. Please explain that there are extraordinary circumstances that warrant, in due fairness, a waiver of the fee. Provide a defensible reason for this.`,
+        },
+        {
+          role: 'user',
           content: `${prompt}`,
         },
       ],
       temperature: 0.7,
     })
     .then((response) => {
-      return res.json(response.body.choices[0].message.content)
+      return res.json(response.body)
     })
     .catch((err) => console.log('OPEN AI API ERR: ', err.message))
 })

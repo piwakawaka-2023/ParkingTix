@@ -11,6 +11,7 @@ exports.seed = async function (knex) {
       created_at: 1687147209343,
       dispute_id: 1,
       user_id: 1,
+      from: 'user',
       content: 'Hey can I get out of this ticket please?',
     },
     {
@@ -18,6 +19,7 @@ exports.seed = async function (knex) {
       created_at: 1687147209343,
       dispute_id: 1,
       user_id: 1,
+      from: 'respondent',
       content: 'Hmm maybe, why?',
     },
     {
@@ -25,6 +27,7 @@ exports.seed = async function (knex) {
       created_at: 1687147209343,
       dispute_id: 1,
       user_id: 1,
+      from: 'user',
       content:
         "I think I deserve to have the fine waived, I'll pay the next one I promise",
     },
@@ -33,6 +36,7 @@ exports.seed = async function (knex) {
       created_at: 1687147209343,
       dispute_id: 2,
       user_id: 1,
+      from: 'user',
       content: 'Please WCC, can I get out of this ticket?',
     },
     {
@@ -40,6 +44,7 @@ exports.seed = async function (knex) {
       created_at: 1687147209343,
       dispute_id: 3,
       user_id: 1,
+      from: 'user',
       content: 'Hi, can I not pay this?',
     },
     {
@@ -47,6 +52,7 @@ exports.seed = async function (knex) {
       created_at: 1687147209343,
       dispute_id: 3,
       user_id: 1,
+      from: 'respondent',
       content: 'Why?',
     },
     {
@@ -54,6 +60,7 @@ exports.seed = async function (knex) {
       created_at: 1687147209343,
       dispute_id: 3,
       user_id: 1,
+      from: 'user',
       content: "I just really don't want to.",
     },
     {
@@ -61,6 +68,7 @@ exports.seed = async function (knex) {
       created_at: 1687147209343,
       dispute_id: 3,
       user_id: 1,
+      from: 'respondent',
       content: 'Nah you need to pay it',
     },
     {
@@ -68,6 +76,7 @@ exports.seed = async function (knex) {
       created_at: 1687147209343,
       dispute_id: 4,
       user_id: 1,
+      from: 'user',
       content: 'Let me off this ticket.',
     },
     {
@@ -75,6 +84,7 @@ exports.seed = async function (knex) {
       created_at: 1687147209343,
       dispute_id: 4,
       user_id: 1,
+      from: 'respondent',
       content: 'Okay',
     },
     {
@@ -82,6 +92,7 @@ exports.seed = async function (knex) {
       created_at: 1687147209343,
       dispute_id: 5,
       user_id: 1,
+      from: 'user',
       content: 'Can I get out of this fine?',
     },
     {
@@ -89,6 +100,7 @@ exports.seed = async function (knex) {
       created_at: 1687147209343,
       dispute_id: 5,
       user_id: 1,
+      from: 'respondent',
       content: 'You need to give us a reason',
     },
   ])
