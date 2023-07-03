@@ -1,9 +1,6 @@
 import type { ThunkAction } from '../store'
 import * as UserModels from '../../models/users'
 import * as api from '../apis/users'
-// import { useAuth0 } from '@auth0/auth0-react'
-
-// const authToken = 'this is the token' // destructure this from the auth0 object somehow
 
 // * SIMPLE ACTIONS
 
