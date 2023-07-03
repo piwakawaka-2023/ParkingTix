@@ -6,6 +6,10 @@ import { getEmails } from '../actions/emails'
 import { getUser } from '../actions/users'
 import { userId } from './App'
 import Hero from './HomeComp/Hero'
+import Features from './HomeComp/Features'
+import StartToday from './HomeComp/StartToday'
+import Reviews from './HomeComp/Reviews'
+import FAQ from './HomeComp/FAQ'
 
 function Home() {
   const dispatch = useAppDispatch()
@@ -16,7 +20,15 @@ function Home() {
     dispatch(getEmails(userId))
   })
 
-  return <Hero />
+  return (
+    <>
+      <Hero />
+      <Features />
+      <StartToday />
+      <Reviews />
+      <FAQ />
+    </>
+  )
 }
 
 export default Home
