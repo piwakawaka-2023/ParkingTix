@@ -31,3 +31,13 @@ export async function updateDispute(id: number,
 export async function deleteDispute(id: number) {
   await request.delete(`${disputesUrl}/${id}`)
 }
+
+
+// fetch dispute with user information
+export async function fetchDisputeUserDetails(
+  disputeId: number
+): Promise<DisputeModels.DisputeUserDetails> {
+  const res = await request.get(`${disputesUrl}/details/${disputeId}`)
+  const dispute = res.body
+  return dispute
+}

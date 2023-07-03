@@ -14,10 +14,11 @@
 #### DISPUTES
 | Method | API Function Name | Endpoint | Protected | Usage | Response |
 | --- | --- | --- | --- | --- | --- |
-| Get | fetchDisputes | /api/v1/disputes/:user_id | No | Get a list of disputes by user id from the DB | An array of Objects (object = dispute[]) |
+| Get | fetchDisputes | /api/v1/disputes/:user_id | No | Get a list of disputes by user id from the DB | An array of Objects (object = DisputeObj[]) |
 | Delete | deleteDispute | /api/v1/disputes/:id | No | Delete dispute from the DB | Status 200 |
 | Post | postDispute | /api/v1/disputes | No | Add a dispute to database | Objects (object = Dispute) |
 | Patch | updateDispute | /api/v1/disputes/:id | No | Update dispute in database, especially for status | Objects (object = Dispute) |
+| Get | fetchDisputeUserDetails | /api/v1/disputes/details/:dispute_id | No | Get a single dispute from the db, containing the users' name | An array of Objects (object = DisputeUserDetails) |
 
 ### Emails:
 | Method | API Function Name | Endpoint | Protected | Usage | Response |

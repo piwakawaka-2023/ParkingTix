@@ -9,6 +9,7 @@ exports.up = function (knex) {
     table.timestamp('created_at').defaultTo(Date.now())
     table.integer('dispute_id')
     table.integer('user_id')
+    table.string('from')
     table.string('content')
   })
 }

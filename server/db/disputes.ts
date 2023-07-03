@@ -43,3 +43,21 @@ export function updateDispute(id: number, newDispute: DisputeModels.Update) {
 export function delDispute(id: number) {
   return db('disputes').delete().where('id', id)
 }
+
+// Gets dispute back (specifically for DisputeUserDetails model) to generate initial ticket details prompt for gpt
+export function getDisputeUserDetails(dispute_id: number) {
+  return db('disputes')
+    .select(
+      'disputes.id as id',
+      'disputes.infringement',
+      'disputes.registration',
+      'disputes.date_issued',
+      'disputes.time_issued',
+      'disputes.offence',
+      'disputes.amount',
+      'users.f_name',
+      'users.l_name'
+    )
+    .where('disputes.id', dispute_id)
+    .join('users', 'disputes.user_id', 'users.id')
+}
