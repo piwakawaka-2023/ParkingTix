@@ -33,6 +33,17 @@ function Dispute(props: Props) {
         </div>
         <EmailsList key={id} disputeId={id} />
       </div>
+      {/* STYLING FOR DROP DOWN IS IN ./STYLES/INDEX.CSS */}
+      <div className="dropdown">
+        <button>Change Status</button>
+        <div className="dropdown-options">
+          <a href="#">Mark as Resolved</a>
+          <a href="#">Mark as Appeal Failed</a>
+          <button>Delete Dispute</button>
+        </div>
+      </div>
+        <button>Check Inbox</button>
+        <button>Send Reply</button>
     </>
   )
 }
