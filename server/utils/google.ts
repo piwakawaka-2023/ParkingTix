@@ -4,7 +4,7 @@ import { Email } from "../../models/google";
 const oauth2Client = new google.auth.OAuth2(
   "607422315781-dlrhdddnoefbe9o5h6725p57oj951o24.apps.googleusercontent.com",
   "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",
-  "http://localhost:5173/auth"
+  "http://localhost:5173/gmailAuthLanding"
 );
 
 export function getAuthURL() {
@@ -23,12 +23,7 @@ export async function getToken(code) {
   let {tokens} = await oauth2Client.getToken(code)
   oauth2Client.setCredentials(tokens)
 
-  console.log(await getMail())
-  // console.log(await getMessagesByThread('1891593d4c7bb4e9'))
-  console.log(await getMessagesByThread('1890939e20501d5c'))
-  // console.log('ONE',await getMessageContent('18909c5cd7bdf8c8'))
-  // console.log('ONE',await getMessageContent('18908fb1eaa720a7'))
-  // console.log(tokens)
+  return tokens.refresh_token
 }
 
 export async function setRefreshToken(refToken) {

@@ -2,11 +2,6 @@ import express, { Router } from 'express'
 import request from 'superagent'
 import {getAuthURL, getMessagesByThread, getToken, sendMail, setRefreshToken} from '../utils/google'
 
-import path from 'path'
-import dotenv from 'dotenv'
-const envPath = path.join(__dirname, '../../.env')
-dotenv.config({ path: envPath })
-
 const router = express.Router()
 
 router.get('/code', async (req, res, next) => {
