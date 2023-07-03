@@ -1,30 +1,13 @@
 import request from 'superagent'
-import * as EmailModels from '../../models/emails'
+import * as DisputeModels from '../../models/disputes'
 
-const emailsUrl = '/api/v1/emails'
+const openaiUrl = '/api/v1/openai'
 
 // fetch emails by user id
-export async function fetchEmailsByUserId(
-  userId: number
-): Promise<EmailModels.EmailObj[]> {
-  const res = await request.get(`${emailsUrl}/${userId}`)
-  const emails = res.body
-  return emails
-}
-
-// fetch emails by dispute id
-export async function fetchEmailsByDisputeId(
-  disputeId: number
-): Promise<EmailModels.EmailObj[]> {
-  const res = await request.get(`${emailsUrl}/threads/${disputeId}`)
-  const emails = res.body
-  return emails
-}
-
-export async function postEmail(
-  newEmail: EmailModels.New
-): Promise<EmailModels.EmailObj> {
-  const res = await request.post(emailsUrl).send(newEmail)
-  const newEmailFromDb = res.body
-  return newEmailFromDb
+export async function fetchInitialEmail(
+  dispute: DisputeModels.DisputeUserDetails
+): Promise<string> {
+  const res = await request.post(`${openaiUrl}/initiate`).send(dispute)
+  const email = res.body
+  return email
 }
