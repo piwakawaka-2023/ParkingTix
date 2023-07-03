@@ -88,10 +88,10 @@ export function getDisputes(userId: number): ThunkAction {
 }
 
 //* Delete Dispute Thunk
-export function deleteDisputeThunk(id: number, token: string): ThunkAction {
+export function deleteDisputeThunk(id: number): ThunkAction {
   return async (dispatch) => {
     try {
-      await api.deleteDispute(id, token)
+      await api.deleteDispute(id)
       dispatch(delDispute(id))
     } catch (err) {
       dispatch(error(String(err)))

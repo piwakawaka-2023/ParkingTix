@@ -1,5 +1,8 @@
 // import { useState } from 'react'
 import * as DisputeModels from '../../models/disputes'
+import * as action from '../actions/disputes'
+import { useAppDispatch } from '../hooks/hooks'
+import { ThunkAction } from '../store'
 import EmailsList from './EmailsList'
 
 interface Props {
@@ -20,6 +23,12 @@ function Dispute(props: Props) {
   } = dispute
   // const [isSelected, setIsSelected] = useState(false)
 
+  const dispatch = useAppDispatch()
+
+  const handleDelete = (id: number) => {
+    dispatch(action.deleteDisputeThunk(id))
+  }
+
   return (
     <>
       <div>
@@ -37,15 +46,18 @@ function Dispute(props: Props) {
       <div className="dropdown">
         <button>Change Status</button>
         <div className="dropdown-options">
-          <a href="#">Mark as Resolved</a>
-          <a href="#">Mark as Appeal Failed</a>
-          <button>Delete Dispute</button>
+          <a href="#">Dispute Resolved</a>
+          <a href="#">Appeal Failed</a>
+          <button onClick={() => handleDelete(dispute.id)}>Delete</button>
         </div>
       </div>
-        <button>Check Inbox</button>
-        <button>Send Reply</button>
+      <button>Check Inbox</button>
+      <button>Send Reply</button>
     </>
   )
 }
 
 export default Dispute
+function dispatch(arg0: ThunkAction<void>) {
+  throw new Error('Function not implemented.')
+}

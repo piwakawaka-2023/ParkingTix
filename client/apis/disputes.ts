@@ -32,11 +32,11 @@ export async function updateDispute(id: number,
   return newDisputeFromDb
 }
 
-export async function deleteDispute(id: number,token:string //auth
+export async function deleteDispute(id: number,
  ) {
   await request
   .delete(`${disputesUrl}/${id}`)
-  .set('Authorization', `Bearer${token}`) //auth
+  // .set('Authorization', `Bearer${token}`)
 
 }
 
