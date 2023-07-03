@@ -3,7 +3,7 @@ import * as UserModels from '../../models/users'
 
 const userUrl = '/api/v1/users'
 
-export async function fetchAllUsers(): Promise<UserModels.UserObj> {
+export async function fetchAllUsers(): Promise<UserModels.UserObj[]> {
   const res = await request.get(userUrl)
   const users = res.body
   return users

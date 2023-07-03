@@ -32,11 +32,11 @@ function Nav() {
     setAnchorEl(null)
   }
 
-  const handleSignOut = () => {
+  const handleLogOut = () => {
     logout()
   }
 
-  const handleSignIn = () => {
+  const handleLogIn = () => {
     loginWithRedirect()
   }
 
@@ -75,7 +75,7 @@ function Nav() {
               <Button color="inherit">Dispute your tix</Button>
             </Link>
             <IfNotAuthenticated>
-              <Button variant="outlined" color="inherit" onClick={handleSignIn}>
+              <Button variant="outlined" color="inherit" onClick={handleLogIn}>
                 Login
               </Button>
             </IfNotAuthenticated>
@@ -119,7 +119,7 @@ function Nav() {
                 <Divider light sx={{ m: 'auto' }} />
                 <MenuItem
                   sx={{ alignSelf: 'center' }}
-                  onClick={handleSignOut}
+                  onClick={handleLogOut}
                   disableRipple
                 >
                   Sign Out
