@@ -1,9 +1,6 @@
 import type { ThunkAction } from '../store'
 import * as UserModels from '../../models/users'
 import * as api from '../apis/users'
-import { useAuth0 } from '@auth0/auth0-react'
-
-// const authToken = 'this is the token' // destructure this from the auth0 object somehow
 
 // * SIMPLE ACTIONS
 
@@ -70,13 +67,10 @@ export function getUser(userId: number): ThunkAction {
   }
 }
 
-export function deleteUserThunk(
-  id: number,
-  token: string //auth
-): ThunkAction {
+export function deleteUserThunk(id: number): ThunkAction {
   return async (dispatch) => {
     try {
-      await api.deleteUser(id, token) //go to api -> which heads to back end, updates db
+      await api.deleteUser(id) //go to api -> which heads to back end, updates db
       dispatch(delUser(id)) // dispatches the simple action -> reducer change state
     } catch (err) {
       dispatch(error(String(err)))
@@ -98,12 +92,11 @@ export function addUserThunk(user: UserModels.New): ThunkAction {
 
 export function updateUserThunk(
   id: number,
-  user: UserModels.Update,
-  token: string
+  user: UserModels.Update
 ): ThunkAction {
   return async (dispatch) => {
     try {
-      const newUser = await api.patchUser(id, user, token)
+      const newUser = await api.patchUser(id, user)
       dispatch(updateUser(newUser))
     } catch (err) {
       dispatch(error(String(err)))
