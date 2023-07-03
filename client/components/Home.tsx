@@ -5,6 +5,7 @@ import { getDisputes } from '../actions/disputes'
 import { getEmails } from '../actions/emails'
 import { getUser } from '../actions/users'
 import { userId } from './App'
+import Hero from './HomeComp/Hero'
 
 function Home() {
   const dispatch = useAppDispatch()
@@ -15,7 +16,7 @@ function Home() {
     dispatch(getEmails(userId))
   })
 
-  return <h1>Hello Im Homie the Home-Page </h1>
+  return <Hero />
 }
 
 export default Home

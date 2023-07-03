@@ -1,16 +1,26 @@
 import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import store from './store'
+import { Auth0Provider } from '@auth0/auth0-react'
 
 import App from './components/App'
 import { BrowserRouter } from 'react-router-dom'
 
 document.addEventListener('DOMContentLoaded', () => {
   createRoot(document.getElementById('app') as HTMLElement).render(
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>
+    <Auth0Provider
+      domain="piwakawaka-2023-brindha.au.auth0.com"
+      clientId="AeLZXmbZd0u0oROiKIT4ZNqXLTrcMs0H"
+      redirectUri={window.location.origin}
+      audience="https://users/api"
+      // useRefreshTokens={true}
+      // cacheLocation="localstorage"
+    >
+      <BrowserRouter>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </BrowserRouter>
+    </Auth0Provider>
   )
 })
