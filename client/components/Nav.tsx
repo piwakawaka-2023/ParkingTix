@@ -32,11 +32,11 @@ function Nav() {
     setAnchorEl(null)
   }
 
-  const handleSignOut = () => {
+  const handleLogOut = () => {
     logout()
   }
 
-  const handleSignIn = () => {
+  const handleLogIn = () => {
     loginWithRedirect()
   }
 
