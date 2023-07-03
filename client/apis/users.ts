@@ -3,6 +3,10 @@ import * as UserModels from '../../models/users'
 
 const userUrl = '/api/v1/users'
 
+export async function getUserId(authId: string) {
+  await request.post(`${userUrl}/userId`).send({authId})
+}
+
 export async function setRefToken(authId: string, refToken: string) {
   await request.patch(`${userUrl}/refToken`).send({authId, refToken})
 }
