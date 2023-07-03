@@ -3,7 +3,7 @@ import * as UserModels from '../../models/users'
 import * as api from '../apis/users'
 import { useAuth0 } from '@auth0/auth0-react'
 
-const authToken = 'this is the token' // destructure this from the auth0 object somehow
+// const authToken = 'this is the token' // destructure this from the auth0 object somehow
 
 // * SIMPLE ACTIONS
 
@@ -57,12 +57,12 @@ export function error(message: string): Action {
 
 // * THUNKS
 
-export function getUser(userId: number, token = authToken): ThunkAction {
+export function getUser(userId: number): ThunkAction {
   return async (dispatch) => {
     try {
       // call the api function, which will access our server and db
       // and will return the user that matches the given id
-      const user = await api.fetchUser(userId, token )
+      const user = await api.fetchUser(userId)
       dispatch(setUser(user))
     } catch (err) {
       dispatch(error(String(err)))
@@ -70,8 +70,10 @@ export function getUser(userId: number, token = authToken): ThunkAction {
   }
 }
 
-export function deleteUserThunk(id: number, token:string //auth
-  ): ThunkAction {
+export function deleteUserThunk(
+  id: number,
+  token: string //auth
+): ThunkAction {
   return async (dispatch) => {
     try {
       await api.deleteUser(id, token) //go to api -> which heads to back end, updates db
@@ -82,10 +84,11 @@ export function deleteUserThunk(id: number, token:string //auth
   }
 }
 
-export function addUserThunk(user: UserModels.New, token:string): ThunkAction {
+export function addUserThunk(user: UserModels.New): ThunkAction {
   return async (dispatch) => {
+    console.log(user)
     try {
-      const newUser = await api.postUser(user, token )
+      const newUser = await api.postUser(user)
       dispatch(addUser(newUser))
     } catch (err) {
       dispatch(error(String(err)))
@@ -95,7 +98,8 @@ export function addUserThunk(user: UserModels.New, token:string): ThunkAction {
 
 export function updateUserThunk(
   id: number,
-  user: UserModels.Update, token:string
+  user: UserModels.Update,
+  token: string
 ): ThunkAction {
   return async (dispatch) => {
     try {

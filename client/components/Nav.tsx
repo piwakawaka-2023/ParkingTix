@@ -76,11 +76,11 @@ function Nav() {
     setAnchorEl(null)
   }
 
-  const handleSignOut = () => {
+  const handleLogOut = () => {
     logout()
   }
 
-  const handleSignIn = () => {
+  const handleLogIn = () => {
     loginWithRedirect()
   }
 
@@ -96,7 +96,7 @@ function Nav() {
 
         <Stack direction="row" spacing={2}>
           <IfNotAuthenticated>
-            <Button variant="outlined" color="inherit" onClick={handleSignIn}>
+            <Button variant="outlined" color="inherit" onClick={handleLogIn}>
               Login
             </Button>
           </IfNotAuthenticated>
@@ -161,7 +161,7 @@ function Nav() {
                 Settings
               </MenuItem>
               <Divider light />
-              <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
+              <MenuItem onClick={handleLogOut}>Sign Out</MenuItem>
             </StyledMenu>
           </>
         </IfAuthenticated>

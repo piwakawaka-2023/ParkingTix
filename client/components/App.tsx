@@ -28,14 +28,15 @@ function App() {
         <IfAuthenticated>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/signup" element={<AddUser />} />
             <Route path="/disputes" element={<DisputesList />} />
             <Route path="/disputes/add" element={<AddDispute />} />
+            <Route path="/signup" element={<AddUser />} />
           </Routes>
         </IfAuthenticated>
         <IfNotAuthenticated>
           <Routes>
             <Route path="/" element={<Home />} />
+            {/* <Route path="/signup" element={<AddUser />} /> */}
           </Routes>
         </IfNotAuthenticated>
       </section>

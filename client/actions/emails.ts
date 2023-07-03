@@ -36,10 +36,10 @@ export function error(message: string): Action {
 
 // * THUNKS
 
-export function getEmails(userId: number): ThunkAction {
+export function getEmails(userId: number, token: string): ThunkAction {
   return async (dispatch) => {
     try {
-      const emails = await api.fetchEmailsByUserId(userId)
+      const emails = await api.fetchEmailsByUserId(userId, token)
       dispatch(setEmails(emails))
     } catch (err) {
       dispatch(error(String(err)))
@@ -47,10 +47,13 @@ export function getEmails(userId: number): ThunkAction {
   }
 }
 
-export function addEmailThunk(email: EmailModels.New): ThunkAction {
+export function addEmailThunk(
+  email: EmailModels.New,
+  token: string
+): ThunkAction {
   return async (dispatch) => {
     try {
-      const newEmail = await api.postEmail(email)
+      const newEmail = await api.postEmail(email, token)
       dispatch(addEmail(newEmail))
     } catch (err) {
       dispatch(error(String(err)))
