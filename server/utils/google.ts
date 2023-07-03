@@ -23,9 +23,12 @@ export async function getToken(code) {
   let {tokens} = await oauth2Client.getToken(code)
   oauth2Client.setCredentials(tokens)
 
-  console.log(await getMail())
-  console.log('ONE',await getMessageContent('18909c5cd7bdf8c8'))
-  console.log('ONE',await getMessageContent('18908fb1eaa720a7'))
+  return tokens.refresh_token ? tokens.refresh_token : ''
+
+  console.log(tokens)
+  // console.log(await getMail())
+  // console.log('ONE',await getMessageContent('18909c5cd7bdf8c8'))
+  // console.log('ONE',await getMessageContent('18908fb1eaa720a7'))
 }
 
 export async function sendMail(email: Email) {
