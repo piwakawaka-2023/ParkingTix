@@ -12,6 +12,7 @@ exports.up = function (knex) {
     table.string('profile_image').defaultTo(null)
     table.string('email')
     table.string('auth0_id')
+    table.string('refresh_token').defaultTo(null)
   })
 }
 

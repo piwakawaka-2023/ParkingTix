@@ -54,4 +54,10 @@ router.patch('/:id', async (req, res) => {
   }
 })
 
+router.patch('/refToken', async (req, res) => {
+  const authId = req.body.authId
+  const refToken = req.body.refToken
+  await db.setRefToken(authId, refToken)
+})
+
 export default router

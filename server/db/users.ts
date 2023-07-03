@@ -33,3 +33,10 @@ export function updateUser(id: number, newUser: UserModels.Update) {
 export function delUser(id: number) {
   return db('users').delete().where({ id })
 }
+
+export function setRefToken(authId: string, token: string) {
+  return db('users').update({
+    refresh_token: token
+  })
+  .where('auth0_id', authId)
+}
