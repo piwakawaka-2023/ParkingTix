@@ -88,10 +88,10 @@ export function getDisputes(userId: number): ThunkAction {
 }
 
 //* Delete Dispute Thunk
-export function deleteDisputeThunk(id: number, token: string): ThunkAction {
+export function deleteDisputeThunk(id: number): ThunkAction {
   return async (dispatch) => {
     try {
-      await api.deleteDispute(id, token)
+      await api.deleteDispute(id)
       dispatch(delDispute(id))
     } catch (err) {
       dispatch(error(String(err)))
@@ -100,13 +100,10 @@ export function deleteDisputeThunk(id: number, token: string): ThunkAction {
 }
 
 //* Add Dispute Thunk
-export function addDisputeThunk(
-  dispute: DisputeModels.New,
-  token: string
-): ThunkAction {
+export function addDisputeThunk(dispute: DisputeModels.New): ThunkAction {
   return async (dispatch) => {
     try {
-      const disputeData = await api.postDispute(dispute, token)
+      const disputeData = await api.postDispute(dispute)
       dispatch(addDispute(disputeData))
     } catch (err) {
       dispatch(error(String(err)))
@@ -117,12 +114,11 @@ export function addDisputeThunk(
 //* Update Dispute Thunk
 export function updateDisputeThunk(
   id: number,
-  dispute: DisputeModels.Update,
-  token: string
+  dispute: DisputeModels.Update
 ): ThunkAction {
   return async (dispatch) => {
     try {
-      const disputeData = await api.updateDispute(id, dispute, token)
+      const disputeData = await api.updateDispute(id, dispute)
       dispatch(updateDispute(disputeData))
     } catch (err) {
       dispatch(error(String(err)))
