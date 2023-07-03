@@ -8,6 +8,9 @@ import Home from './Home'
 import Nav from './Nav'
 import { CssBaseline } from '@mui/material'
 import EmailTest from './EmailTest'
+import Footer from './Footer'
+import NotFoundPage from './NotFoundPage'
+
 
 // Temp/hardcoded user id of 1. This will change when we get Auth0 set up
 export const userId = 1
@@ -31,7 +34,9 @@ function App() {
           <Route path="/disputes" element={<DisputesList />} />
           <Route path="/disputes/add" element={<AddDispute />} />
           <Route path="/test" element={<EmailTest />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
+        <Footer />
       </section>
     </>
   )
