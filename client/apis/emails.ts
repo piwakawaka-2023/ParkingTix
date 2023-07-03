@@ -5,11 +5,9 @@ const emailsUrl = '/api/v1/emails'
 
 // fetch emails by user id
 export async function fetchEmailsByUserId(
-  userId: number, token:string //auth
+  userId: number
 ): Promise<EmailModels.EmailObj[]> {
-  const res = await request
-  .get(`${emailsUrl}/${userId}`)
-  .set('Authorization', `Bearer${token}`) //auth
+  const res = await request.get(`${emailsUrl}/${userId}`)
   const emails = res.body
   return emails
 }
@@ -24,11 +22,9 @@ export async function fetchEmailsByDisputeId(
 }
 
 export async function postEmail(
-  newEmail: EmailModels.New, token:string //auth
+  newEmail: EmailModels.New
 ): Promise<EmailModels.EmailObj> {
-  const res = await request
-  .post(emailsUrl).send(newEmail)
-  .set('Authorization', `Bearer${token}`) //auth
+  const res = await request.post(emailsUrl).send(newEmail)
   const newEmailFromDb = res.body
   return newEmailFromDb
 }

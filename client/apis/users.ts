@@ -11,7 +11,6 @@ export async function fetchAllUsers(): Promise<UserModels.UserObj[]> {
 
 export async function fetchUser(userId: number): Promise<UserModels.UserObj> {
   const res = await request.get(`${userUrl}/${userId}`)
-
   const user = res.body
   return user
 }
@@ -19,32 +18,20 @@ export async function fetchUser(userId: number): Promise<UserModels.UserObj> {
 export async function postUser(
   newUser: UserModels.New
 ): Promise<UserModels.UserObj> {
-  const res = await request
-    .post(userUrl)
-
-    .send(newUser)
+  const res = await request.post(userUrl).send(newUser)
   const newUserFromDb = res.body
   return newUserFromDb
 }
 
 export async function patchUser(
   id: number,
-  newUser: UserModels.Update,
-  token: string //auth
+  newUser: UserModels.Update
 ): Promise<UserModels.UserObj> {
-  const res = await request
-    .patch(`${userUrl}/${id}`)
-    .set('Authorization', `Bearer${token}`) //auth
-    .send({ user: newUser })
+  const res = await request.patch(`${userUrl}/${id}`).send({ user: newUser })
   const newUserFromDb = res.body
   return newUserFromDb
 }
 
-export async function deleteUser(
-  id: number,
-  token: string //auth
-) {
-  await request
-    .delete(`${userUrl}/${id}`)
-    .set('Authorization', `Bearer${token}`) //auth
+export async function deleteUser(id: number) {
+  await request.delete(`${userUrl}/${id}`)
 }

@@ -10,7 +10,7 @@ export default function userReducers(state = initialState, action: Action) {
       return payload
 
     case ADD_EMAIL:
-      return [payload, ...state]
+      return [...state, payload]
 
     case ERROR:
       return payload
