@@ -8,6 +8,8 @@ import Home from './Home'
 import Nav from './Nav'
 import { CssBaseline } from '@mui/material'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+import Footer from './Footer'
+import NotFoundPage from './NotFoundPage'
 
 // Temp/hardcoded user id of 1. This will change when we get Auth0 set up
 export const userId = 1
@@ -19,9 +21,6 @@ function App() {
   return (
     <>
       <CssBaseline />
-      {/* <header className="header">
-        <h1>Parking • Tix </h1>
-      </header> */}
       <section className="main">
         <Header />
         <Nav />
@@ -31,11 +30,13 @@ function App() {
             <Route path="/disputes" element={<DisputesList />} />
             <Route path="/disputes/add" element={<AddDispute />} />
             <Route path="/signup" element={<AddUser />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </IfAuthenticated>
         <IfNotAuthenticated>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="*" element={<NotFoundPage />} />
             {/* <Route path="/signup" element={<AddUser />} /> */}
           </Routes>
         </IfNotAuthenticated>

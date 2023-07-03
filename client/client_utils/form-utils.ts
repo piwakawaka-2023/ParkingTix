@@ -16,6 +16,7 @@ export function checkNewDisputeForm(input: DisputeModels.New) {
     input.user_id &&
     input.infringement &&
     input.registration &&
+    input.offence &&
     input.date_issued &&
     input.time_issued &&
     input.location &&

@@ -45,4 +45,15 @@ router.patch('/:id', async (req, res) => {
   }
 })
 
+// get dispute with user information
+router.get('/details/:disputeId', async (req, res) => {
+  const dispute_id = +req.params.disputeId
+  try {
+    const dispute = await db.getDisputeUserDetails(dispute_id)
+    res.json(dispute[0])
+  } catch (error) {
+    res.sendStatus(500)
+  }
+})
+
 export default router

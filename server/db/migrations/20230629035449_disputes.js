@@ -9,6 +9,7 @@ exports.up = function (knex) {
     table.integer('user_id')
     table.integer('infringement')
     table.string('registration')
+    table.string('offence')
     table.string('date_issued')
     table.string('time_issued')
     table.string('location')

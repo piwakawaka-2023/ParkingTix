@@ -17,7 +17,7 @@ UserModels.New
 UserModels.Update
 ```
 
-## Objects
+## Basic Models for Internal api:
 
 ```js
 UserData {
@@ -36,6 +36,7 @@ disputes {
   created_at: integer
   user_id: integer
   infringement: integer
+  offence: string
   registration: string
   date_issued: string
   time_issued: string
@@ -57,6 +58,23 @@ Valid statuses:
   created_at: integer
   dispute_id: integer
   user_id: integer
+  from: string
   content: string
 }
+```
+
+## OpenAi api
+
+Model of 'DisputeUserDetails'. This is used for generating an initial appeal email, and contains ticket details, plus the users' name. It is returned from the 'fetchDisputeUserDetails' api function in apis>disputes
+```js
+  infringement: number
+  registration: string
+  offence: string
+  date_issued: string
+  time_issued: string
+  location: string
+  amount: number
+  f_name: string
+  l_name: string
+
 ```
