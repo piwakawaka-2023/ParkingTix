@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <Auth0Provider
       domain="piwakawaka-2023-brindha.au.auth0.com"
       clientId="AeLZXmbZd0u0oROiKIT4ZNqXLTrcMs0H"
-      redirectUri={window.location.origin}
+      redirectUri="http://localhost:5173/signup"
       audience="https://users/api"
       // useRefreshTokens={true}
       // cacheLocation="localstorage"

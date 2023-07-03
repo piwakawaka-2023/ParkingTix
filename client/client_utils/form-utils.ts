@@ -4,7 +4,7 @@ import * as EmailModels from '../../models/emails'
 
 export function checkNewUserForm(input: UserModels.New) {
   // check all required fields are filled
-  if (input.f_name && input.l_name && input.email) {
+  if (input.f_name && input.l_name) {
     return true
   } else {
     return false
