@@ -12,9 +12,6 @@ import Footer from './Footer'
 import NotFoundPage from './NotFoundPage'
 import GmailAuthLanding from './GmailAuthLanding'
 
-// Temp/hardcoded user id of 1. This will change when we get Auth0 set up
-export const userId = 1
-
 function App() {
   // Authenticated/Not Authenticated thingies go in this component
   // Db called to get user data from Home component once authenticated
