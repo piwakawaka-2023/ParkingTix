@@ -40,6 +40,7 @@ function App() {
             {/* <Route path="/signup" element={<AddUser />} /> */}
           </Routes>
         </IfNotAuthenticated>
+        <Footer />
       </section>
     </>
   )
