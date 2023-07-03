@@ -9,6 +9,8 @@ import * as EmailModels from '../../models/emails'
 import { addEmailThunk, getEmails } from '../actions/emails'
 import Dispute from './Dispute'
 import { getDisputes } from '../actions/disputes'
+import { checkNewEmailForm } from '../client_utils/form-utils'
+import { getUser } from '../actions/users'
 
 const blankDispute = {
   id: 0,
@@ -64,12 +66,14 @@ function EmailTest() {
     const { value, name } = evt.target
     setReplyData({
       ...replyData,
-      [name]: [value],
+      [name]: value,
     })
     setCurrentDispute(getCurrentDispute(replyData.dispute_id))
+    console.log(replyData)
   }
 
   useEffect(() => {
+    dispatch(getUser(replyData.user_id))
     dispatch(getDisputes(replyData.user_id))
     dispatch(getEmails(replyData.user_id))
     setCurrentDispute(getCurrentDispute(replyData.dispute_id))
@@ -77,13 +81,21 @@ function EmailTest() {
 
   const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault()
-    dispatch(addEmailThunk(replyData))
+
+    if (checkNewEmailForm(replyData)) {
+      dispatch(addEmailThunk(replyData))
+      
+    } else {
+      alert('Please fill in all required fields')
+    }
   }
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="user_id">User id: </label>
+        <label htmlFor="user_id" defaultValue="1">
+          User id:{' '}
+        </label>
         <input type="number" name="user_id" onChange={handleChange} />
         <label htmlFor="dispute_id">Dispute id: </label>
         <input
