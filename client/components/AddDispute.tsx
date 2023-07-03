@@ -76,6 +76,13 @@ function AddDisputes() {
               name="location"
               onChange={handleChange}
             />
+            <label htmlFor="offence">Alleged Offence: </label>
+            <input
+              type="text"
+              id="offence"
+              name="offence"
+              onChange={handleChange}
+            />
             <label htmlFor="amount">Amount Due: $</label>
             <input
               type="number"
