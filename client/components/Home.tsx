@@ -15,16 +15,23 @@ import { getUserId } from '../apis/users'
 
 function Home() {
   const dispatch = useAppDispatch()
-  const {getAccessTokenSilently, user} = useAuth0()
+  const { getAccessTokenSilently, user } = useAuth0()
 
   useEffect(() => {
-    getUserId(user?.sub)
-      .then((userId) => {
-        dispatch(getUser(userId))
-        dispatch(getDisputes(userId))
-        dispatch(getEmails(userId))
-      })
-  }, [])
+    if (user?.sub) {
+      console.log(user.sub)
+      getUserId(user?.sub)
+        .then((userId) => {
+          console.log('inside promise', userId)
+          dispatch(getUser(userId))
+          dispatch(getDisputes(userId))
+          dispatch(getEmails(userId))
+        })
+        .catch((e) => {
+          console.error(e)
+        })
+    }
+  }, [user])
 
   return (
     <>
