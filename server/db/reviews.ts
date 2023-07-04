@@ -1,20 +1,20 @@
 import connection from './connection'
-import * as ReviewModel from '../../models/reviews'
+import * as ReviewModels from '../../models/reviews'
 
 const db = connection
 
 //GET
-export function getAllReviews(): Promise<ReviewModel[]> {
-  return db('reviews').select('id', 'f_name as name', 'rating', 'reviews')
+export function getAllReviews(): Promise<ReviewModels.ReviewObj[]> {
+  return db('reviews').select('id', 'f_name as name', 'rating', 'review')
 }
 
 //POST
-export function addReview(review: string): Promise<ReviewModel[]> {
+export function addReview(review: string): Promise<ReviewModels.New[]> {
   return db('reviews').insert(review).returning(['name', 'rating', 'review'])
 }
 
 // //UPDATE
-export function updateReview(newReview: string, id: number) {
+export function updateReview(id: number, newReview: ReviewModels.Update) {
   return db('reviews').update({ rating: newReview }).where({ id: id })
 }
 

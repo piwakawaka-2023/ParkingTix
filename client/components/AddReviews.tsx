@@ -1,12 +1,12 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useAppDispatch } from '../hooks/hooks'
 import * as actions from '../actions/reviews'
-import * as ReviewModel from '../../models/reviews'
+import * as ReviewModels from '../../models/reviews'
 
 export default function AddReviewsForm() {
   const dispatch = useAppDispatch()
 
-  const [formData, setFormData] = useState({} as ReviewModel)
+  const [formData, setFormData] = useState({} as ReviewModels.ReviewObj)
 
   const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setFormData({

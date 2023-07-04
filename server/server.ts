@@ -6,7 +6,7 @@ import disputes from './routes/disputes'
 import emails from './routes/emails'
 import openai from './routes/openai'
 import googleRoutes from './routes/google'
-
+import reviews from './routes/reviews'
 
 const server = express()
 

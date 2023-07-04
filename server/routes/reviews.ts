@@ -1,6 +1,10 @@
 import express from 'express'
-const router = express.Router()
 import * as db from '../db/reviews'
+
+
+const router = express.Router()
+
+
 
 router.get('/', async (req, res) => {
   try {
@@ -18,7 +22,7 @@ router.post('/', async (req, res) => {
     const reviewFromDB = await db.addReview(review)
     res.json(reviewFromDB[0])
   } catch (error) {
-    ('oh no post reviews route error')
+    ;('oh no post reviews route error')
     res.sendStatus(500)
   }
 })
@@ -35,8 +39,6 @@ router.patch('/:id', async (req, res) => {
   }
 })
 
-export default router
-
 router.delete('/:id', async (req, res) => {
   const id = Number(req.params.id)
   try {
@@ -46,3 +48,5 @@ router.delete('/:id', async (req, res) => {
     console.error('oh no delete reviews route error')
   }
 })
+
+export default router

@@ -1,6 +1,7 @@
 import type { ThunkAction } from '../store'
-// import * as ReviewModels from '../../models/review'
-// import * as api from '../apis/review'
+import * as ReviewModels from '../../models/reviews'
+import * as api from '../apis/reviews'
+import { Reviews } from '@mui/icons-material'
 
 // * SIMPLE ACTIONS
 
@@ -11,16 +12,16 @@ export const UPD_REVIEW = 'UPD_REVIEW'
 export const ERROR = 'ERROR'
 
 export type Action =
-  | { type: typeof SET_REVIEW; payload: ReviewModels.ReviewObj }
+  | { type: typeof SET_REVIEW; payload: ReviewModels.ReviewObj[] }
   | { type: typeof DEL_REVIEW; payload: number }
   | { type: typeof ADD_REVIEW; payload: ReviewModels.ReviewObj }
   | { type: typeof UPD_REVIEW; payload: ReviewModels.ReviewObj }
   | { type: typeof ERROR; payload: string }
 
-export function setReview(review: ReviewModels.ReviewObj): Action {
+export function setReview(reviews: ReviewModels.ReviewObj[]): Action {
   return {
     type: SET_REVIEW,
-    payload: review,
+    payload: reviews,
   }
 }
 
@@ -54,13 +55,11 @@ export function error(message: string): Action {
 
 // * THUNKS
 
-export function getReview(userId: number): ThunkAction {
+export function getReviews(reviewId: number): ThunkAction {
   return async (dispatch) => {
     try {
-      // call the api function, which will access our server and db
-      // and will return the user that matches the given id
-      const user = await api.fetchReview(userId)
-      dispatch(setReview(user))
+      const reviewsArr = await api.fetchReviews(reviewId)
+      dispatch(setReview(reviewsArr))
     } catch (err) {
       dispatch(error(String(err)))
     }
@@ -70,8 +69,8 @@ export function getReview(userId: number): ThunkAction {
 export function deleteReviewThunk(id: number): ThunkAction {
   return async (dispatch) => {
     try {
-      await api.deleteReview(id) //go to api -> which heads to back end, updates db
-      dispatch(delReview(id)) // dispatches the simple action -> reducer change state
+      await api.deleteReview(id)
+      dispatch(delReview(id))
     } catch (err) {
       dispatch(error(String(err)))
     }
@@ -95,7 +94,7 @@ export function updateReviewThunk(
 ): ThunkAction {
   return async (dispatch) => {
     try {
-      const newReview = await api.patchReview(id, review)
+      const newReview = await api.updateReview(id, review)
       dispatch(updateReview(newReview))
     } catch (err) {
       dispatch(error(String(err)))
