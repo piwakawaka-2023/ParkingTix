@@ -2,7 +2,6 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 import * as DisputeModels from '../../models/disputes'
 import { useAppDispatch, useAppSelector } from '../hooks/hooks'
 import * as actions from '../actions/disputes'
-import { useAuth0 } from '@auth0/auth0-react'
 
 import '../client_utils/form-utils'
 
@@ -13,7 +12,6 @@ import { UserObj } from '../../models/users'
 function AddDisputes() {
   const user = useAppSelector((state) => state.users) as UserObj
   const dispatch = useAppDispatch()
-  const { getAccessTokenSilently } = useAuth0() //auth
 
   const [formData, setFormData] = useState({
     user_id: user?.id,
@@ -25,9 +23,9 @@ function AddDisputes() {
     setFormData({ ...formData, [evt.target.name]: evt.target.value })
   }
 
-  const handleSubmit = async (evt: FormEvent) => {
+
+  const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault()
-    const token = await getAccessTokenSilently()
     // check everything is there, if not send alert
     if (checkNewDisputeForm(formData)) {
       dispatch(actions.addDisputeThunk(formData))
@@ -75,6 +73,13 @@ function AddDisputes() {
               type="text"
               id="location"
               name="location"
+              onChange={handleChange}
+            />
+            <label htmlFor="offence">Alleged Offence: </label>
+            <input
+              type="text"
+              id="offence"
+              name="offence"
               onChange={handleChange}
             />
             <label htmlFor="amount">Amount Due: $</label>

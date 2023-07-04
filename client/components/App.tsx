@@ -27,6 +27,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/disputes" element={<DisputesList />} />
             <Route path="/disputes/add" element={<AddDispute />} />
+            <Route path="/test" element={<EmailTest />} />
             <Route path="/signup" element={<AddUser />} />
             <Route path="*" element={<NotFoundPage />} />
             <Route path='/gmailAuthLanding' element={<GmailAuthLanding />} />
