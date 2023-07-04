@@ -6,6 +6,6 @@ export async function getGoogleCode() {
 }
 
 export async function sendGoogleCode(code: string) {
-  await request.post('api/v1/gmail/code').send({code})
+  const refToken = await request.post('api/v1/gmail/code').send({code})
+  return refToken
 }
-

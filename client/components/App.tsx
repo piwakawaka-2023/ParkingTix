@@ -7,14 +7,10 @@ import Header from './Header'
 import Home from './Home'
 import Nav from './Nav'
 import { CssBaseline } from '@mui/material'
-import EmailTest from './EmailTest'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Footer from './Footer'
 import NotFoundPage from './NotFoundPage'
-
-
-// Temp/hardcoded user id of 1. This will change when we get Auth0 set up
-export const userId = 1
+import GmailAuthLanding from './GmailAuthLanding'
 
 function App() {
   // Authenticated/Not Authenticated thingies go in this component
@@ -34,6 +30,7 @@ function App() {
             <Route path="/test" element={<EmailTest />} />
             <Route path="/signup" element={<AddUser />} />
             <Route path="*" element={<NotFoundPage />} />
+            <Route path='/gmailAuthLanding' element={<GmailAuthLanding />} />
           </Routes>
         </IfAuthenticated>
         <IfNotAuthenticated>
@@ -43,7 +40,6 @@ function App() {
             {/* <Route path="/signup" element={<AddUser />} /> */}
           </Routes>
         </IfNotAuthenticated>
-        <Footer />
       </section>
     </>
   )
