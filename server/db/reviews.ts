@@ -15,7 +15,8 @@ export function addReview(review: string): Promise<ReviewModels.New[]> {
 
 // //UPDATE
 export function updateReview(id: number, newReview: ReviewModels.Update) {
-  return db('reviews').update({ rating: newReview }).where({ id: id })
+  const { f_name, rating, review } = newReview
+  return db('reviews').update({ f_name, rating, review }).where({ id }).returning('*')
 }
 
 //DELETE

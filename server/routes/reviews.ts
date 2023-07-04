@@ -1,10 +1,7 @@
 import express from 'express'
 import * as db from '../db/reviews'
 
-
 const router = express.Router()
-
-
 
 router.get('/', async (req, res) => {
   try {
@@ -29,10 +26,10 @@ router.post('/', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
   const id = Number(req.params.id)
-  const newReview = req.body.review //
+  const newReview = req.body
   try {
-    await db.updateReview(newReview, id)
-    res.sendStatus(200)
+    const reviewFromDb = await db.updateReview(id, newReview)
+    res.json(reviewFromDb[0])
   } catch (err) {
     console.log('oh no update reviews route error', err)
     res.sendStatus(500)
