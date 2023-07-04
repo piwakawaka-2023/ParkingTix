@@ -16,7 +16,7 @@ function AddDisputes() {
   const { getAccessTokenSilently } = useAuth0() //auth
 
   const [formData, setFormData] = useState({
-    user_id: user.id,
+    user_id: user?.id,
     status: 'New',
   } as DisputeModels.New)
   const [formVisible, setFormVisible] = useState(true)
@@ -24,7 +24,7 @@ function AddDisputes() {
   const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value })
   }
-  
+
   const handleSubmit = async (evt: FormEvent) => {
     evt.preventDefault()
     const token = await getAccessTokenSilently()

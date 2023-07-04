@@ -15,15 +15,18 @@ import { getUserId } from '../apis/users'
 
 function Home() {
   const dispatch = useAppDispatch()
-  const {getAccessTokenSilently, user} = useAuth0()
+  const { getAccessTokenSilently, user } = useAuth0()
 
   useEffect(() => {
-    if (user.sub) {
+    if (user?.sub) {
       getUserId(user?.sub)
         .then((userId) => {
           dispatch(getUser(userId))
           dispatch(getDisputes(userId))
           dispatch(getEmails(userId))
+        })
+        .catch((e) => {
+          console.error(e)
         })
     }
   }, [])
