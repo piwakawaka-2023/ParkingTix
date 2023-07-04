@@ -1,6 +1,12 @@
 import express, { Router } from 'express'
 import request from 'superagent'
-import {getAuthURL, getMessagesByThread, getToken, sendMail, setRefreshToken} from '../utils/google'
+import {
+  getAuthURL,
+  getMessagesByThread,
+  getToken,
+  sendMail,
+  setRefreshToken,
+} from '../utils/google'
 
 const router = express.Router()
 
