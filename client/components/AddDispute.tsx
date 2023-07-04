@@ -2,7 +2,6 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 import * as DisputeModels from '../../models/disputes'
 import { useAppDispatch } from '../hooks/hooks'
 import * as actions from '../actions/disputes'
-import { useAuth0 } from '@auth0/auth0-react'
 
 import '../client_utils/form-utils'
 
@@ -15,7 +14,6 @@ import { userId } from './App'
 
 function AddDisputes() {
   const dispatch = useAppDispatch()
-  const { getAccessTokenSilently } = useAuth0() //auth
 
   const [formData, setFormData] = useState({
     user_id: userId,
@@ -26,13 +24,12 @@ function AddDisputes() {
   const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value })
   }
-  
-  const handleSubmit = async (evt: FormEvent) => {
+
+  const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault()
-    const token = await getAccessTokenSilently()
     // check everything is there, if not send alert
     if (checkNewDisputeForm(formData)) {
-      dispatch(actions.addDisputeThunk(formData, token))
+      dispatch(actions.addDisputeThunk(formData))
       setFormVisible(false)
     } else {
       alert('Please fill in all required fields')
