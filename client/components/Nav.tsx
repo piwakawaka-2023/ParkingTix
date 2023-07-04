@@ -57,23 +57,19 @@ function Nav() {
           </Typography>
 
           <Stack direction="row" spacing={2}>
-            <Button color="inherit">
+            {/* <Button color="inherit">
               <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
                 Home
               </Link>
-            </Button>
-            <Link
-              to="/disputes"
-              style={{ textDecoration: 'none', color: 'white' }}
-            >
-              <Button color="inherit">Disputes</Button>
-            </Link>
-            <Link
-              to="/disputes/add"
-              style={{ textDecoration: 'none', color: 'white' }}
-            >
-              <Button color="inherit">Dispute your tix</Button>
-            </Link>
+            </Button> */}
+            <IfAuthenticated>
+              <Link
+                to="/dashboard"
+                style={{ textDecoration: 'none', color: 'white' }}
+              >
+                <Button color="inherit">Dashboard</Button>
+              </Link>
+            </IfAuthenticated>
             <IfNotAuthenticated>
               <Button variant="outlined" color="inherit" onClick={handleLogIn}>
                 Login
@@ -107,12 +103,22 @@ function Nav() {
                   <Typography variant="subtitle1">{user?.email}</Typography>
                 </Box>
                 <Divider light sx={{ m: 'auto' }} />
-                <MenuItem onClick={handleClose} disableRipple>
+                <MenuItem
+                  component={Link}
+                  to="/dashboard/profile"
+                  onClick={handleClose}
+                  disableRipple
+                >
                   <PersonOutlineOutlinedIcon />
                   Profile
                 </MenuItem>
                 <Divider light sx={{ m: 'auto' }} />
-                <MenuItem onClick={handleClose} disableRipple>
+                <MenuItem
+                  component={Link}
+                  to="/dashboard/profile/settings"
+                  onClick={handleClose}
+                  disableRipple
+                >
                   <TuneOutlinedIcon />
                   Settings
                 </MenuItem>
