@@ -11,3 +11,7 @@ export async function sendGoogleCode(code: string) {
   console.log('api token', refToken)
   return refToken
 }
+
+export async function setGoogleAuth(token: string) {
+  await request.post('api/v1/gmail/token').send({ token })
+}
