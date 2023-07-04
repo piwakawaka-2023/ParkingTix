@@ -11,6 +11,7 @@ import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Footer from './Footer'
 import NotFoundPage from './NotFoundPage'
 import GmailAuthLanding from './GmailAuthLanding'
+import EmailTest from './EmailTest'
 
 function App() {
   // Authenticated/Not Authenticated thingies go in this component
@@ -30,7 +31,7 @@ function App() {
             <Route path="/test" element={<EmailTest />} />
             <Route path="/signup" element={<AddUser />} />
             <Route path="*" element={<NotFoundPage />} />
-            <Route path='/gmailAuthLanding' element={<GmailAuthLanding />} />
+            <Route path="/gmailAuthLanding" element={<GmailAuthLanding />} />
           </Routes>
         </IfAuthenticated>
         <IfNotAuthenticated>
