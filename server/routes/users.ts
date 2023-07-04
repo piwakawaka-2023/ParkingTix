@@ -64,7 +64,8 @@ router.post('/userId', async (req, res) => {
   const authId = req.body.authId
   console.log('db route', authId)
   const userId = await db.getUserId(authId)
-  res.send(userId)
+  console.log('db route', userId)
+  res.json(userId.id)
 })
 
 export default router

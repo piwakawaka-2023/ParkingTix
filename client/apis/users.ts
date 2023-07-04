@@ -4,11 +4,13 @@ import * as UserModels from '../../models/users'
 const userUrl = '/api/v1/users'
 
 export async function getUserId(authId: string) {
-  await request.post(`${userUrl}/userId`).send({authId})
+  const res = await request.post(`${userUrl}/userId`).send({ authId })
+  const userId = res.body
+  return userId
 }
 
 export async function setRefToken(authId: string, refToken: string) {
-  await request.patch(`${userUrl}/refToken`).send({authId, refToken})
+  await request.patch(`${userUrl}/refToken`).send({ authId, refToken })
 }
 
 export async function fetchAllUsers(): Promise<UserModels.UserObj[]> {

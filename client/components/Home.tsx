@@ -19,8 +19,10 @@ function Home() {
 
   useEffect(() => {
     if (user?.sub) {
+      console.log(user.sub)
       getUserId(user?.sub)
         .then((userId) => {
+          console.log('inside promise', userId)
           dispatch(getUser(userId))
           dispatch(getDisputes(userId))
           dispatch(getEmails(userId))
@@ -29,7 +31,7 @@ function Home() {
           console.error(e)
         })
     }
-  }, [])
+  }, [user])
 
   return (
     <>
