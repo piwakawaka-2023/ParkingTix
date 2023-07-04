@@ -18,12 +18,14 @@ function Home() {
   const {getAccessTokenSilently, user} = useAuth0()
 
   useEffect(() => {
-    getUserId(user?.sub)
-      .then((userId) => {
-        dispatch(getUser(userId))
-        dispatch(getDisputes(userId))
-        dispatch(getEmails(userId))
-      })
+    if (user.sub) {
+      getUserId(user?.sub)
+        .then((userId) => {
+          dispatch(getUser(userId))
+          dispatch(getDisputes(userId))
+          dispatch(getEmails(userId))
+        })
+    }
   }, [])
 
   return (

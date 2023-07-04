@@ -16,6 +16,7 @@ export function addUser(newUser: UserModels.New) {
 }
 
 export function getUserId(authId: string) {
+  console.log('db', authId)
   return db('users').select('id').where('auth0_id', authId).first()
 }
 

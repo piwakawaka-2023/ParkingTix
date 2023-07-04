@@ -1,24 +1,22 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import * as DisputeModels from '../../models/disputes'
-import { useAppDispatch } from '../hooks/hooks'
+import { useAppDispatch, useAppSelector } from '../hooks/hooks'
 import * as actions from '../actions/disputes'
 import { useAuth0 } from '@auth0/auth0-react'
 
 import '../client_utils/form-utils'
 
-// Temp/hardcoded user id, will change when auth0 implemented
-// import { userId } from './App'
-
 import { checkNewDisputeForm } from '../client_utils/form-utils'
 import { Link } from 'react-router-dom'
-import { userId } from './App'
+import { UserObj } from '../../models/users'
 
 function AddDisputes() {
+  const user = useAppSelector((state) => state.users) as UserObj
   const dispatch = useAppDispatch()
   const { getAccessTokenSilently } = useAuth0() //auth
 
   const [formData, setFormData] = useState({
-    user_id: userId,
+    user_id: user.id,
     status: 'New',
   } as DisputeModels.New)
   const [formVisible, setFormVisible] = useState(true)
@@ -32,7 +30,7 @@ function AddDisputes() {
     const token = await getAccessTokenSilently()
     // check everything is there, if not send alert
     if (checkNewDisputeForm(formData)) {
-      dispatch(actions.addDisputeThunk(formData, token))
+      dispatch(actions.addDisputeThunk(formData))
       setFormVisible(false)
     } else {
       alert('Please fill in all required fields')
