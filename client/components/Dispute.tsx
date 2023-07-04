@@ -1,5 +1,7 @@
 // import { useState } from 'react'
+import { useState } from 'react'
 import * as DisputeModels from '../../models/disputes'
+import * as EmailModels from '../../models/emails'
 import EmailsList from './EmailsList'
 
 interface Props {

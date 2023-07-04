@@ -27,11 +27,16 @@ const blankDispute = {
 }
 
 function EmailTest() {
+  const [emails, setEmails] = useState([] as EmailModels.EmailObj[])
   const dispatch = useAppDispatch()
 
   const disputesArr = useAppSelector(
     (state) => state.disputes
   ) as DisputeModels.DisputeObj[]
+
+  const allEmails = useAppSelector(
+    (state) => state.emails
+  ) as EmailModels.EmailObj[]
 
   const [replyData, setReplyData] = useState({
     dispute_id: 1,
@@ -77,19 +82,19 @@ function EmailTest() {
 
     if (checkNewEmailForm(replyData)) {
       dispatch(addEmailThunk(replyData))
-      
     } else {
       alert('Please fill in all required fields')
     }
   }
 
   const handleReply = () => {
+    const emails = allEmails.filter((email) => {
+      return email.dispute_id === currentDispute.id
+    })
+    console.log(emails)
     // grab all the emails from the relevant dispute/thread
-
     // call a 'generate reply' function using this messages array
-
     // get the gpt response and post it to the emails table with correct details
-
     // @ this point the gmail api will also trigger to send the email
   }
 
