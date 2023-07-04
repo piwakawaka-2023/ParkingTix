@@ -72,13 +72,6 @@ function EmailTest() {
     console.log(replyData)
   }
 
-  useEffect(() => {
-    dispatch(getUser(replyData.user_id))
-    dispatch(getDisputes(replyData.user_id))
-    dispatch(getEmails(replyData.user_id))
-    setCurrentDispute(getCurrentDispute(replyData.dispute_id))
-  }, [currentDispute])
-
   const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault()
 
@@ -89,6 +82,23 @@ function EmailTest() {
       alert('Please fill in all required fields')
     }
   }
+
+  const handleReply = () => {
+    // grab all the emails from the relevant dispute/thread
+
+    // call a 'generate reply' function using this messages array
+
+    // get the gpt response and post it to the emails table with correct details
+
+    // @ this point the gmail api will also trigger to send the email
+  }
+
+  useEffect(() => {
+    dispatch(getUser(replyData.user_id))
+    dispatch(getDisputes(replyData.user_id))
+    dispatch(getEmails(replyData.user_id))
+    setCurrentDispute(getCurrentDispute(replyData.dispute_id))
+  }, [currentDispute])
 
   return (
     <>
@@ -112,7 +122,7 @@ function EmailTest() {
         <input type="text" name="content" onChange={handleChange} />
         <button>Submit</button>
       </form>
-
+      <button onClick={handleReply}>Reply</button>
       <Dispute dispute={currentDispute} />
     </>
   )
