@@ -1,6 +1,11 @@
 import express from 'express'
 import request from 'superagent'
-import { generatePromptFromDispute } from '../utils/openai'
+import {
+  generatePromptFromDispute,
+  generateThreadFromEmails,
+  initialEmailInstructions,
+  responseEmailInstructions,
+} from '../utils/openai'
 
 import path from 'path'
 import dotenv from 'dotenv'
@@ -26,13 +31,43 @@ router.post('/initiate', (req, res) => {
       messages: [
         {
           role: 'user',
-          content: `Write an email to the Wellington City Council (New Zealand) to appeal a parking ticket. The ticket details will be sent in my next message. Please explain that there are extraordinary circumstances that warrant, in due fairness, a waiver of the fee. Provide a plausible and defensible reason for this. Be imaginative, but within reality. Don't use serious emergency events as the reason. Do not claim to have attached any documents to the email, and do not make an offer to provide any documents to support the appeal. Keep the email brief (4 or fewer paragraphs). Write only the email body text (no subject line etc). Do not include any square brackets for information I don't provide you. Don't copy out all the ticket details.`,
+          content: `${initialEmailInstructions}`,
         },
         {
           role: 'user',
           content: `${prompt}`,
         },
       ],
+      temperature: 0.7,
+    })
+    .then((response) => {
+      return res.json(response.body.choices[0].message.content)
+    })
+    .catch((err) => console.log('OPEN AI API ERR: ', err.message))
+})
+
+// generate reply email
+router.post('/response', (req, res) => {
+  const emails = req.body
+
+  // take the array of emails and turn it into an array fitting the 'messages' format below
+  const prompt = generateThreadFromEmails(emails)
+
+  const messages = [
+    {
+      role: 'user',
+      content: `${responseEmailInstructions}`,
+    },
+    ...prompt,
+  ]
+
+  request
+    .post('https://api.openai.com/v1/chat/completions')
+    .set('Authorization', `Bearer ${process.env.OPEN_AI_KEY}`)
+    .set('Content-Type', 'application/json')
+    .send({
+      model: 'gpt-3.5-turbo',
+      messages: messages,
       temperature: 0.7,
     })
     .then((response) => {

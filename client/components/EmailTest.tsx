@@ -11,6 +11,7 @@ import Dispute from './Dispute'
 import { getDisputes } from '../actions/disputes'
 import { checkNewEmailForm } from '../client_utils/form-utils'
 import { getUser } from '../actions/users'
+import { generateResponseEmail } from '../actions/openai'
 
 const blankDispute = {
   id: 0,
@@ -27,7 +28,7 @@ const blankDispute = {
 }
 
 function EmailTest() {
-  const [emails, setEmails] = useState([] as EmailModels.EmailObj[])
+  // const [emails, setEmails] = useState([] as EmailModels.EmailObj[])
   const dispatch = useAppDispatch()
 
   const disputesArr = useAppSelector(
@@ -88,14 +89,13 @@ function EmailTest() {
   }
 
   const handleReply = () => {
+    // grab all the emails from the relevant dispute/thread
     const emails = allEmails.filter((email) => {
       return email.dispute_id === currentDispute.id
     })
-    console.log(emails)
-    // grab all the emails from the relevant dispute/thread
-    // call a 'generate reply' function using this messages array
-    // get the gpt response and post it to the emails table with correct details
-    // @ this point the gmail api will also trigger to send the email
+
+    // call a 'generate response' action using this email array
+    dispatch(generateResponseEmail(currentDispute, emails))
   }
 
   useEffect(() => {

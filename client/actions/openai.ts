@@ -8,7 +8,8 @@
 //*   Imports
 //* ----------------------------- *//
 import type { ThunkAction } from '../store'
-import * as DisputeModels from '../../models/disputes' // DisputeObj, New, Update
+import * as DisputeModels from '../../models/disputes'
+import * as EmailModels from '../../models/emails'
 import * as api from '../apis/openai'
 
 import * as emailActions from './emails'
@@ -52,6 +53,32 @@ export function generateInitialEmail(
       const initialEmailText = await api.fetchInitialEmail(dispute)
       // call util function to create a new email object
       const email = createNewEmailFromText(dispute, initialEmailText, true)
+
+      // send the initial email to the Gmail api here
+
+      // call the add email thunk to post the new email to the db
+      dispatch(emailActions.addEmailThunk(email))
+    } catch (err) {
+      dispatch(error(String(err)))
+    }
+  }
+}
+
+//* Generate response email from an array of emails in a thread
+export function generateResponseEmail(
+  dispute: DisputeModels.DisputeObj,
+  emails: EmailModels.EmailObj[]
+): ThunkAction {
+  return async (dispatch) => {
+    try {
+      // get the body text of the response email
+      const responseEmailText = await api.fetchResponseEmail(emails)
+      const text = responseEmailText
+        .replace(/from me: /i, '')
+        .replace(/from respondent: /i, '')
+
+      // call util function to create a new email object from the body text
+      const email = createNewEmailFromText(dispute, text, false)
 
       // send the initial email to the Gmail api here
 
