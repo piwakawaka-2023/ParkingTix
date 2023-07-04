@@ -90,12 +90,14 @@ function EmailTest() {
 
   const handleReply = () => {
     // grab all the emails from the relevant dispute/thread
+
     const emails = allEmails.filter((email) => {
       return email.dispute_id === currentDispute.id
     })
 
     // call a 'generate response' action using this email array
     dispatch(generateResponseEmail(currentDispute, emails))
+
   }
 
   useEffect(() => {

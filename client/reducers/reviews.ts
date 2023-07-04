@@ -1,4 +1,4 @@
-import type * as Models from '../../models/review'
+import type * as ReviewModels from '../../models/reviews'
 import {
   SET_REVIEW,
   ADD_REVIEW,
@@ -8,7 +8,7 @@ import {
   Action,
 } from '../actions/reviews'
 
-const initialState = [] as Models.ReviewObj[]
+const initialState = [] as ReviewModels.ReviewObj[]
 
 export default function reviewReducers(state = initialState, action: Action) {
   const { type, payload } = action
