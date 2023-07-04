@@ -1,14 +1,14 @@
 import * as EmailModels from '../../models/emails'
 import * as DisputeModels from '../../models/disputes'
 
-export function generateTicketDetails(
+export function generatePromptFromDispute(
   dispute: DisputeModels.DisputeUserDetails
 ) {
   const {
     infringement,
-    registration,
+    // registration,
     date_issued,
-    time_issued,
+    // time_issued,
     location,
     offence,
     amount,
@@ -19,13 +19,12 @@ export function generateTicketDetails(
   const details = `
     Name: ${f_name} ${l_name},
     Ticket number: ${infringement},
-    Licence plate: ${registration},
-    Date the ticket was issued: ${date_issued},
-    Time the ticket was issued (24hr time): ${time_issued},
     Location of alleged offence: ${location},
+    Date issued: ${date_issued},
     Alleged offence: ${offence},
     Fine amount: $${amount},
   `
+
   return details
 }
 

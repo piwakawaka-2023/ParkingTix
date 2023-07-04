@@ -15,4 +15,4 @@ server/public/bundle.js.map
 coverage/*
 
 # Dotenv env settings
-.env
+# .env

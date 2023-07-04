@@ -43,6 +43,12 @@ router.post('/', async (req, res) => {
   }
 })
 
+router.patch('/refToken', async (req, res) => {
+  const authId = req.body.authId
+  const refToken = req.body.refToken
+  await db.setRefToken(authId, refToken)
+})
+
 router.patch('/:id', async (req, res) => {
   const id = +req.params.id
   const userEdit = req.body
@@ -52,6 +58,12 @@ router.patch('/:id', async (req, res) => {
   } catch (err) {
     res.sendStatus(500)
   }
+})
+
+router.post('/userId', async (req, res) => {
+  const authId = req.body.authId
+  const userId = await db.getUserId(authId)
+  res.json(userId.id)
 })
 
 export default router

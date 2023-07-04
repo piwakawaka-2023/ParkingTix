@@ -6,6 +6,7 @@ export interface UserObj {
   profile_image: string | null
   email: string
   auth0_id: string
+  refresh_token: string
 }
 
 export interface New {

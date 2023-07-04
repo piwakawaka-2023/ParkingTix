@@ -15,6 +15,11 @@ export function addUser(newUser: UserModels.New) {
   return db('users').insert(newUser).returning('*')
 }
 
+export function getUserId(authId: string) {
+  console.log('db', authId)
+  return db('users').select('id').where('auth0_id', authId).first()
+}
+
 export function updateUser(id: number, newUser: UserModels.Update) {
   const { f_name, l_name, profile_image, email } = newUser
   return db('users')
@@ -32,4 +37,11 @@ export function updateUser(id: number, newUser: UserModels.Update) {
 
 export function delUser(id: number) {
   return db('users').delete().where({ id })
+}
+
+export function setRefToken(authId: string, token: string) {
+  return db('users').update({
+    refresh_token: token
+  })
+  .where('auth0_id', authId)
 }

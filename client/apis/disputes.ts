@@ -13,31 +13,24 @@ export async function fetchDisputes(
 }
 
 export async function postDispute(
-  newDispute: DisputeModels.New, token:string //auth
+  newDispute: DisputeModels.New
 ): Promise<DisputeModels.DisputeObj> {
-  const res = await request.post(disputesUrl)
-  .set('Authorization', `Bearer${token}`) //auth
-  .send(newDispute)
+  const res = await request.post(disputesUrl).send(newDispute)
   const newDisputeFromDb = res.body
   return newDisputeFromDb
 }
 
-export async function updateDispute(id: number,
-  newDispute: DisputeModels.Update, token:string //auth
+export async function updateDispute(
+  id: number,
+  newDispute: DisputeModels.Update
 ): Promise<DisputeModels.DisputeObj> {
-  const res = await request.patch(`${disputesUrl}/${id}`)
-  .set('Authorization', `Bearer${token}`) //auth
-  .send(newDispute)
+  const res = await request.patch(`${disputesUrl}/${id}`).send(newDispute)
   const newDisputeFromDb = res.body
   return newDisputeFromDb
 }
 
-export async function deleteDispute(id: number,token:string //auth
- ) {
-  await request
-  .delete(`${disputesUrl}/${id}`)
-  .set('Authorization', `Bearer${token}`) //auth
-
+export async function deleteDispute(id: number) {
+  await request.delete(`${disputesUrl}/${id}`)
 }
 
 // fetch dispute with user information
@@ -48,7 +41,6 @@ export async function fetchDisputeUserDetails(
   const dispute = res.body
   return dispute
 }
-
 
 // function logError(err: Error) {
 //   if (err.message === 'Username Taken') {

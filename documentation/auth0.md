@@ -1,5 +1,15 @@
-new column in users called auth0_id
+###client-side
 
-update user model
+Determine if the current user is logged in or not
+
+Allow the user to sign up
+
+Allow the user to log in
+
+Send the access token with each request
+
+Allow the user to log off
+
+Hide/show components based on the user's auth status
 
 

@@ -11,6 +11,7 @@ import '../client_utils/form-utils'
 import { checkNewUserForm } from '../client_utils/form-utils'
 import { Link } from 'react-router-dom'
 import { fetchAllUsers } from '../apis/users'
+import { getGoogleCode } from '../apis/google'
 
 function AddUser() {
   const dispatch = useAppDispatch()
@@ -89,9 +90,7 @@ function AddUser() {
       {!formVisible && (
         <div className="form-container">
           <h1>Thank you for signing up!</h1>
-          <Link to="/">
-            <button>Continue</button>
-          </Link>
+            <button onClick={getGoogleCode}>Continue</button>
         </div>
       )}
     </>

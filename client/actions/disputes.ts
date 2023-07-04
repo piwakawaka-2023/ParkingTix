@@ -11,6 +11,8 @@ import type { ThunkAction } from '../store'
 import * as DisputeModels from '../../models/disputes' // DisputeObj, New, Update
 import * as api from '../apis/disputes'
 
+import * as openaiActions from './openai'
+
 //* ----------------------------- *//
 //*   Variables
 //* ----------------------------- *//
@@ -88,10 +90,10 @@ export function getDisputes(userId: number): ThunkAction {
 }
 
 //* Delete Dispute Thunk
-export function deleteDisputeThunk(id: number, token: string): ThunkAction {
+export function deleteDisputeThunk(id: number): ThunkAction {
   return async (dispatch) => {
     try {
-      await api.deleteDispute(id, token)
+      await api.deleteDispute(id)
       dispatch(delDispute(id))
     } catch (err) {
       dispatch(error(String(err)))
@@ -99,15 +101,20 @@ export function deleteDisputeThunk(id: number, token: string): ThunkAction {
   }
 }
 
-//* Add Dispute Thunk
-export function addDisputeThunk(
-  dispute: DisputeModels.New,
-  token: string
-): ThunkAction {
+
+//* Add Dispute Thunk (includes triggering openai to generate an appeal email)
+export function addDisputeThunk(dispute: DisputeModels.New): ThunkAction {
   return async (dispatch) => {
     try {
-      const disputeData = await api.postDispute(dispute, token)
+      // post the new dispute to the db
+      const disputeData = await api.postDispute(dispute)
+      // add the new dispute (from db) to local store
       dispatch(addDispute(disputeData))
+
+      // call the dispute function to return the users name
+      const disputeUser = await api.fetchDisputeUserDetails(disputeData.id)
+      // call the openai action to create an initial email
+      dispatch(openaiActions.generateInitialEmail(disputeUser))
     } catch (err) {
       dispatch(error(String(err)))
     }
@@ -117,12 +124,11 @@ export function addDisputeThunk(
 //* Update Dispute Thunk
 export function updateDisputeThunk(
   id: number,
-  dispute: DisputeModels.Update,
-  token: string
+  dispute: DisputeModels.Update
 ): ThunkAction {
   return async (dispatch) => {
     try {
-      const disputeData = await api.updateDispute(id, dispute, token)
+      const disputeData = await api.updateDispute(id, dispute)
       dispatch(updateDispute(disputeData))
     } catch (err) {
       dispatch(error(String(err)))
