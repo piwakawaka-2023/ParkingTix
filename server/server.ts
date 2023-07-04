@@ -17,5 +17,6 @@ server.use('/api/v1/disputes', disputes)
 server.use('/api/v1/emails', emails)
 server.use('/api/v1/openai', openai)
 server.use('/api/v1/gmail', googleRoutes)
+server.use('/api/v1/reviews', reviews)
 
 export default server

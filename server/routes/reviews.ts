@@ -1,0 +1,48 @@
+import express from 'express'
+const router = express.Router()
+import * as db from '../db/reviews'
+
+router.get('/', async (req, res) => {
+  try {
+    const reviewsArr = await db.getAllReviews()
+    res.json(reviewsArr)
+  } catch (error) {
+    console.error('Oh no, reviews route error', error)
+    res.sendStatus(500)
+  }
+})
+router.post('/', async (req, res) => {
+  const review = req.body
+
+  try {
+    const reviewFromDB = await db.addReview(review)
+    res.json(reviewFromDB[0])
+  } catch (error) {
+    ('oh no post reviews route error')
+    res.sendStatus(500)
+  }
+})
+
+router.patch('/:id', async (req, res) => {
+  const id = Number(req.params.id)
+  const newReview = req.body.review //
+  try {
+    await db.updateReview(newReview, id)
+    res.sendStatus(200)
+  } catch (err) {
+    console.log('oh no update reviews route error', err)
+    res.sendStatus(500)
+  }
+})
+
+export default router
+
+router.delete('/:id', async (req, res) => {
+  const id = Number(req.params.id)
+  try {
+    await db.deleteReview(id)
+    res.sendStatus(200)
+  } catch (error) {
+    console.error('oh no delete reviews route error')
+  }
+})

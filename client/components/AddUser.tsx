@@ -4,9 +4,7 @@ import { useAppDispatch } from '../hooks/hooks'
 import * as actions from '../actions/users'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useNavigate } from 'react-router-dom'
-
 import '../client_utils/form-utils'
-
 // Temp/hardcoded user id, will change when auth0 implemented
 import { checkNewUserForm } from '../client_utils/form-utils'
 import { Link } from 'react-router-dom'
@@ -21,13 +19,6 @@ function AddUser() {
   const [formData, setFormData] = useState({} as UserModels.New)
   const [formVisible, setFormVisible] = useState(true)
 
-  /* --- AUTH STUFF NEEDED --- */
-  // useEffect - will send a database call to look at your database "getAllUsers"
-  // this will return an array of user objects
-  // you can then check if the logged in user is in your db, probably using a find? - probably checking user.sub with the auth0_id in your db
-  // you may need to add this column to your db
-  // if that check return true - redirect to '/'
-  // if false (not in your db) - stay on '/sign-up'
 
   useEffect(() => {
     setFormData({
