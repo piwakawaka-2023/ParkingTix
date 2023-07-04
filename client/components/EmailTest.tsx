@@ -11,6 +11,7 @@ import Dispute from './Dispute'
 import { getDisputes } from '../actions/disputes'
 import { checkNewEmailForm } from '../client_utils/form-utils'
 import { getUser } from '../actions/users'
+import { generateResponseEmail } from '../actions/openai'
 
 const blankDispute = {
   id: 0,
@@ -27,11 +28,16 @@ const blankDispute = {
 }
 
 function EmailTest() {
+  // const [emails, setEmails] = useState([] as EmailModels.EmailObj[])
   const dispatch = useAppDispatch()
 
   const disputesArr = useAppSelector(
     (state) => state.disputes
   ) as DisputeModels.DisputeObj[]
+
+  const allEmails = useAppSelector(
+    (state) => state.emails
+  ) as EmailModels.EmailObj[]
 
   const [replyData, setReplyData] = useState({
     dispute_id: 1,
@@ -72,23 +78,32 @@ function EmailTest() {
     console.log(replyData)
   }
 
+  const handleSubmit = (evt: FormEvent) => {
+    evt.preventDefault()
+
+    if (checkNewEmailForm(replyData)) {
+      dispatch(addEmailThunk(replyData))
+    } else {
+      alert('Please fill in all required fields')
+    }
+  }
+
+  const handleReply = () => {
+    // grab all the emails from the relevant dispute/thread
+    const emails = allEmails.filter((email) => {
+      return email.dispute_id === currentDispute.id
+    })
+
+    // call a 'generate response' action using this email array
+    dispatch(generateResponseEmail(currentDispute, emails))
+  }
+
   useEffect(() => {
     dispatch(getUser(replyData.user_id))
     dispatch(getDisputes(replyData.user_id))
     dispatch(getEmails(replyData.user_id))
     setCurrentDispute(getCurrentDispute(replyData.dispute_id))
   }, [currentDispute])
-
-  const handleSubmit = (evt: FormEvent) => {
-    evt.preventDefault()
-
-    if (checkNewEmailForm(replyData)) {
-      dispatch(addEmailThunk(replyData))
-      
-    } else {
-      alert('Please fill in all required fields')
-    }
-  }
 
   return (
     <>
@@ -112,7 +127,7 @@ function EmailTest() {
         <input type="text" name="content" onChange={handleChange} />
         <button>Submit</button>
       </form>
-
+      <button onClick={handleReply}>Reply</button>
       <Dispute dispute={currentDispute} />
     </>
   )
