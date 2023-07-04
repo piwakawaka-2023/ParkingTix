@@ -40,27 +40,17 @@ function EmailTest() {
     content: '',
   })
 
-  const [currentDispute, setCurrentDispute] = useState({
-    id: 0,
-    created_at: 0,
-    user_id: 0,
-    infringement: 0,
-    registration: '',
-    offence: '',
-    date_issued: '',
-    time_issued: '',
-    location: '',
-    amount: 0,
-    status: '',
-  } as DisputeModels.DisputeObj)
+  // const [currentDispute, setCurrentDispute] = useState({disputesArr[0]} as DisputeModels.DisputeObj)
 
-  function getCurrentDispute(disputeId: number): DisputeModels.DisputeObj {
-    const current = disputesArr.find((disp) => {
-      return disp.id == disputeId
-    })
-    if (current === undefined) return blankDispute
-    return current
-  }
+  const currentDispute = disputesArr[0]
+
+  // function getCurrentDispute(disputeId: number): DisputeModels.DisputeObj {
+  //   const current = disputesArr.find((disp) => {
+  //     return disp.id == disputeId
+  //   })
+  //   if (current === undefined) return blankDispute
+  //   return current
+  // }
 
   const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = evt.target
@@ -68,42 +58,33 @@ function EmailTest() {
       ...replyData,
       [name]: value,
     })
-    setCurrentDispute(getCurrentDispute(replyData.dispute_id))
-    console.log(replyData)
+    // setCurrentDispute(getCurrentDispute(replyData.dispute_id))
+    // console.log(replyData)
   }
 
   useEffect(() => {
     dispatch(getUser(replyData.user_id))
     dispatch(getDisputes(replyData.user_id))
     dispatch(getEmails(replyData.user_id))
-    setCurrentDispute(getCurrentDispute(replyData.dispute_id))
+    // setCurrentDispute(getCurrentDispute(replyData.dispute_id))
   }, [currentDispute])
 
   const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault()
 
-    if (checkNewEmailForm(replyData)) {
-      dispatch(addEmailThunk(replyData))
-      
-    } else {
-      alert('Please fill in all required fields')
-    }
+  //   if (checkNewEmailForm(replyData)) {
+  //     dispatch(addEmailThunk(replyData))
+
+  //   } else {
+  //     alert('Please fill in all required fields')
+  //   }
+
+    dispatch(addEmailThunk(replyData))
   }
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="user_id" defaultValue="1">
-          User id:{' '}
-        </label>
-        <input type="number" name="user_id" onChange={handleChange} />
-        <label htmlFor="dispute_id">Dispute id: </label>
-        <input
-          type="number"
-          name="dispute_id"
-          defaultValue="1"
-          onChange={handleChange}
-        />
         <label htmlFor="from">
           From (&apos;me&apos; or &apos;respondent&apos;):{' '}
         </label>
