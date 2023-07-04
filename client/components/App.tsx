@@ -12,10 +12,15 @@ import Footer from './Footer'
 import NotFoundPage from './NotFoundPage'
 import GmailAuthLanding from './GmailAuthLanding'
 import EmailTest from './EmailTest'
+import { useAppSelector } from '../hooks/hooks'
 
 function App() {
   // Authenticated/Not Authenticated thingies go in this component
   // Db called to get user data from Home component once authenticated
+
+  useAppSelector((state) => {
+    console.log(state)
+  })
 
   return (
     <>

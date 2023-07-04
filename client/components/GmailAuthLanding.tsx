@@ -11,7 +11,6 @@ export default function GmailAuthLanding() {
   useEffect(() => {
     sendGoogleCode(code)
       .then((refToken) => {
-        console.log(refToken)
         setRefToken(user?.sub, refToken)
       })
       .then(() => {
