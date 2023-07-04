@@ -49,12 +49,14 @@ export function getDisputeUserDetails(dispute_id: number) {
   return db('disputes')
     .select(
       'disputes.id as id',
+      'disputes.user_id',
       'disputes.infringement',
       'disputes.registration',
       'disputes.date_issued',
       'disputes.time_issued',
       'disputes.offence',
       'disputes.amount',
+      'disputes.location',
       'users.f_name',
       'users.l_name'
     )
