@@ -22,6 +22,7 @@ import * as action from '../../actions/disputes'
 
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import ClickAwayListener from '@mui/material/ClickAwayListener'
+import { checkInbox } from '../../apis/google'
 
 interface Props {
   dispute: DisputeModels.DisputeObj
@@ -38,6 +39,7 @@ function Dispute(props: Props) {
     registration,
     time_issued,
     location,
+    thread_id,
     amount,
     offence,
     status,
@@ -92,6 +94,11 @@ function Dispute(props: Props) {
   const handleFailed = () => {
     dispatch(action.updateDisputeThunk(id, { status: 'Failed' }))
     window.location.reload()
+  }
+
+  const handleCheckInbox = async () => {
+    const inbox = await checkInbox(thread_id)
+    console.log(inbox)
   }
 
   return (
@@ -177,6 +184,7 @@ function Dispute(props: Props) {
             )}
           </Popper>
           <Button onClick={() => handleDelete(id)}>Delete</Button>
+          <Button onClick={handleCheckInbox}>Check Inbox</Button>
         </ButtonGroup>
         <EmailsList key={id} disputeId={id} />
         <Divider sx={{ mb: 1, mt: 1 }} />

@@ -60,7 +60,7 @@ export function addDispute(dispute: DisputeModels.DisputeObj): Action {
 //* Update Dispute Action
 export function updateDispute(dispute: DisputeModels.DisputeObj): Action {
   return {
-    type: ADD_DISPUTE,
+    type: UPD_DISPUTE,
     payload: dispute,
   }
 }

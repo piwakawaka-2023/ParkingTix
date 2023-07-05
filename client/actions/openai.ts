@@ -68,6 +68,7 @@ export function generateInitialEmail(
 
       // send the initial email to the Gmail api here
       const threadId = await sendEmail(gmailEmail)
+      console.log('openai action', threadId)
       dispatch(updateDisputeThunk(dispute.id, { thread_id: threadId }))
 
       // call the add email thunk to post the new email to the db

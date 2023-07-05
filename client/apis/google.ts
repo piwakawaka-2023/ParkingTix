@@ -17,8 +17,13 @@ export async function setGoogleAuth(token: string) {
 }
 
 export async function sendEmail(email) {
-  console.log('api route')
-  const res = await request.post('/api/v1/gmail/send').send({email})
-  const threadId = res.body
+  const res = await request.post('/api/v1/gmail/send').send({ email })
+  const threadId = res.text
   return threadId
+}
+
+export async function checkInbox(threadId: string) {
+  const res = await request.post('/api/v1/gmail/thread').send({ threadId })
+  const emails = res.body
+  return emails
 }
