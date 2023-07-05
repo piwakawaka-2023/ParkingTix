@@ -15,6 +15,8 @@ exports.up = function (knex) {
     table.string('location')
     table.integer('amount')
     table.string('status').defaultTo('New')
+    table.string('recipient').defaultTo('chrisswan1612@gmail.com')
+    table.string('thread_id').defaultTo(null)
   })
 }
 

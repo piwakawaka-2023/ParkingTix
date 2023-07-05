@@ -56,6 +56,7 @@ export function getDisputeUserDetails(dispute_id: number) {
       'disputes.time_issued',
       'disputes.offence',
       'disputes.amount',
+      'disputes.recipient',
       'disputes.location',
       'users.f_name',
       'users.l_name'
