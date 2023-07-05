@@ -14,19 +14,17 @@ function EmailsList(props: Props) {
   const allEmails = useAppSelector(
     (state) => state.emails
   ) as EmailModels.EmailObj[]
-  
+
   const emails = allEmails.filter((email) => {
     return email.dispute_id === disputeId
   })
 
   return (
-    <div>
+    <>
       {emails.map((email) => {
-        return (
-            <Email key={email.id} email={email} />
-        )
+        return <Email key={email.id} email={email} />
       })}
-    </div>
+    </>
   )
 }
 

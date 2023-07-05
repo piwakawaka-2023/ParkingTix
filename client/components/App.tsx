@@ -96,8 +96,8 @@ function App() {
               }
             />
 
-            <Route path="/disputes" element={<DisputeList />} />
-            <Route path="/disputes/add" element={<AddDispute />} />
+            {/* <Route path="/disputes" element={<DisputeList />} />
+            <Route path="/disputes/add" element={<AddDispute />} /> */}
             <Route path="/test" element={<EmailTest />} />
             <Route path="/signup" element={<AddUser />} />
             <Route

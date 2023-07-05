@@ -5,7 +5,23 @@ function DashboardPage() {
   const user = useAppSelector((state) => state.users)
   const disputes = useAppSelector((state) => state.disputes)
 
-  console.log(user)
+  const resolvedCount = disputes.filter(
+    (dispute) => dispute.status === 'Resolved'
+  ).length
+  const failedCount = disputes.filter(
+    (dispute) => dispute.status === 'Failed'
+  ).length
+
+  let totalPrice = 0
+
+  for (const item of disputes) {
+    if (item.status === 'Resolved') {
+      totalPrice += item.amount
+    }
+  }
+
+  console.log(totalPrice)
+
   return (
     <>
       <Typography variant="h4" component="div" sx={{ ml: 3, mb: 4 }}>
@@ -19,6 +35,7 @@ function DashboardPage() {
         sx={{
           display: 'flex',
           alignItems: 'center',
+          mb: 5,
         }}
       >
         <Paper sx={{ width: '45%', m: 'auto', p: 2 }}>
@@ -26,7 +43,21 @@ function DashboardPage() {
         </Paper>
 
         <Paper sx={{ width: '45%', m: 'auto', p: 2 }}>
-          <Typography>Disputes Resolved: </Typography>
+          <Typography>Disputes Resolved: {resolvedCount} </Typography>
+        </Paper>
+      </Box>
+
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <Paper sx={{ width: '45%', m: 'auto', p: 2 }}>
+          <Typography>Disputes Failed: {failedCount}</Typography>
+        </Paper>
+        <Paper sx={{ width: '45%', m: 'auto', p: 2 }}>
+          <Typography>Money Saved: ${totalPrice}</Typography>
         </Paper>
       </Box>
     </>
