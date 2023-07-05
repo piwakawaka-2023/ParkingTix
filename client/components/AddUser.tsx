@@ -101,8 +101,7 @@ function AddUser() {
         {!formVisible && (
           <div className="form-container">
             <h1>Thank you for signing up!</h1>
-            {/* <button onClick={getGoogleCode}>Continue</button> */}
-            <button>Continue</button>
+            <button onClick={getGoogleCode}>Continue</button>
           </div>
         )}
       </Box>
