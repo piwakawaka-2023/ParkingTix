@@ -28,14 +28,14 @@ function Home() {
           dispatch(getDisputes(userId))
           dispatch(getEmails(userId))
         })
-        .then(() => {
-          setGoogleAuth(dbUser.refresh_token)
-        })
         .catch((e) => {
           console.error(e)
         })
     }
-  }, [user])
+    if (dbUser.refresh_token) {
+      setGoogleAuth(dbUser.refresh_token)
+    }
+  }, [dbUser])
 
   return (
     <>

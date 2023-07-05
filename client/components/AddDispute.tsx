@@ -23,12 +23,12 @@ function AddDisputes() {
     setFormData({ ...formData, [evt.target.name]: evt.target.value })
   }
 
-
   const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault()
     // check everything is there, if not send alert
     if (checkNewDisputeForm(formData)) {
-      dispatch(actions.addDisputeThunk(formData))
+      console.log(formData)
+      dispatch(actions.addDisputeThunk(formData, user.email))
       setFormVisible(false)
     } else {
       alert('Please fill in all required fields')
@@ -80,6 +80,13 @@ function AddDisputes() {
               type="text"
               id="offence"
               name="offence"
+              onChange={handleChange}
+            />
+            <label htmlFor="recipient">Dispute Email Address: </label>
+            <input
+              type="text"
+              id="recipient"
+              name="recipient"
               onChange={handleChange}
             />
             <label htmlFor="amount">Amount Due: $</label>

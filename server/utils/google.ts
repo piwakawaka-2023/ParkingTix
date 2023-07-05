@@ -26,12 +26,14 @@ export async function getToken(code) {
 }
 
 export async function setRefreshToken(refToken) {
+  console.log('setting auth', refToken)
   oauth2Client.setCredentials({
     refresh_token: refToken,
   })
 }
 
 export async function sendMail(email: Email) {
+  console.log(email)
   const subject = `Ticket Number ${email.infringementNo} Dispute`
   const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`
   const messageParts = [

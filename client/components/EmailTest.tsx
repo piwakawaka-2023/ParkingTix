@@ -12,6 +12,7 @@ import { getDisputes } from '../actions/disputes'
 import { checkNewEmailForm } from '../client_utils/form-utils'
 import { getUser } from '../actions/users'
 import { generateResponseEmail } from '../actions/openai'
+import { useAuth0 } from '@auth0/auth0-react'
 
 const blankDispute = {
   id: 0,
@@ -28,6 +29,7 @@ const blankDispute = {
 }
 
 function EmailTest() {
+  const { user } = useAuth0()
   // const [emails, setEmails] = useState([] as EmailModels.EmailObj[])
   const dispatch = useAppDispatch()
 

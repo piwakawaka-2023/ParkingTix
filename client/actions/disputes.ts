@@ -101,20 +101,25 @@ export function deleteDisputeThunk(id: number): ThunkAction {
   }
 }
 
-
 //* Add Dispute Thunk (includes triggering openai to generate an appeal email)
-export function addDisputeThunk(dispute: DisputeModels.New): ThunkAction {
+export function addDisputeThunk(
+  dispute: DisputeModels.New,
+  userEmail: string
+): ThunkAction {
   return async (dispatch) => {
     try {
       // post the new dispute to the db
+      console.log('before postDispute')
       const disputeData = await api.postDispute(dispute)
+      console.log('after postDispute')
       // add the new dispute (from db) to local store
       dispatch(addDispute(disputeData))
-
+      console.log('after postDispute')
       // call the dispute function to return the users name
       const disputeUser = await api.fetchDisputeUserDetails(disputeData.id)
+      console.log('after fetchUser')
       // call the openai action to create an initial email
-      dispatch(openaiActions.generateInitialEmail(disputeUser))
+      dispatch(openaiActions.generateInitialEmail(disputeUser, userEmail))
     } catch (err) {
       dispatch(error(String(err)))
     }

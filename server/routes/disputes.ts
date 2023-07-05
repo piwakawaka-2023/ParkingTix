@@ -26,6 +26,7 @@ router.delete('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const dispute = req.body
+  console.log('postDispute server route', dispute)
   try {
     const newDispute = await db.addDispute(dispute)
     res.json(newDispute[0])

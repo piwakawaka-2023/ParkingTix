@@ -15,6 +15,7 @@ export async function fetchDisputes(
 export async function postDispute(
   newDispute: DisputeModels.New
 ): Promise<DisputeModels.DisputeObj> {
+  console.log('postDispute api')
   const res = await request.post(disputesUrl).send(newDispute)
   const newDisputeFromDb = res.body
   return newDisputeFromDb

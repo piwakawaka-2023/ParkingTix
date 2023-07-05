@@ -32,6 +32,7 @@ router.post('/thread', async (req, res) => {
 })
 
 router.post('/send', async (req, res) => {
+  console.log('send email route')
   const email = req.body.email
   const threadId = await sendMail(email)
   res.send(threadId)

@@ -18,6 +18,8 @@ exports.seed = async function (knex) {
       location: 'Cuba Street',
       amount: 100,
       status: 'In Progress',
+      recipient: 'chrisswan1612@gmail.com',
+      thread_id: '1234',
     },
     {
       id: 2,
@@ -31,6 +33,8 @@ exports.seed = async function (knex) {
       location: 'Lambton Quay',
       amount: 40,
       status: 'Pending Response',
+      recipient: 'chrisswan1612@gmail.com',
+      thread_id: '12345',
     },
     {
       id: 3,
@@ -44,6 +48,8 @@ exports.seed = async function (knex) {
       location: 'Aro Street',
       amount: 200,
       status: 'Appeal Failed',
+      recipient: 'chrisswan1612@gmail.com',
+      thread_id: '1234234',
     },
     {
       id: 4,
@@ -57,6 +63,8 @@ exports.seed = async function (knex) {
       location: 'Webb Street',
       amount: 30,
       status: 'Resolved',
+      recipient: 'chrisswan1612@gmail.com',
+      thread_id: '123234',
     },
     {
       id: 5,
@@ -70,6 +78,8 @@ exports.seed = async function (knex) {
       location: 'Bidwill Street',
       amount: 40,
       status: 'In Progress (User Override)',
+      recipient: 'chrisswan1612@gmail.com',
+      thread_id: '1234444',
     },
   ])
 }
