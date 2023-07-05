@@ -78,7 +78,7 @@ function Nav() {
           </Stack>
           <IfAuthenticated>
             <>
-              {console.log(user)}
+              {/* {console.log(user)} */}
               <IconButton
                 size="large"
                 aria-label="account of current user"

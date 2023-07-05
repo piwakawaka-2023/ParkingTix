@@ -20,8 +20,6 @@ function DashboardPage() {
     }
   }
 
-  console.log(totalPrice)
-
   return (
     <>
       <Typography variant="h4" component="div" sx={{ ml: 3, mb: 4 }}>
