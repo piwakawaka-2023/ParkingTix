@@ -21,14 +21,14 @@ function Hero() {
         color="white"
         sx={{ ml: 'auto', mr: 'auto', mt: 'auto', color: '#ffcd05' }}
       >
-        Never pay a parking Tix again...
+        Never pay parking tickets again...
       </Typography>
       <Typography
         variant="subtitle1"
         color="white"
         sx={{ ml: 'auto', mr: 'auto', mb: 'auto' }}
       >
-        Need some help with that?
+        We are here to help!
       </Typography>
     </Paper>
   )

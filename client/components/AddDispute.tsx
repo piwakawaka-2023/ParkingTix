@@ -8,6 +8,7 @@ import '../client_utils/form-utils'
 import { checkNewDisputeForm } from '../client_utils/form-utils'
 import { Link } from 'react-router-dom'
 import { UserObj } from '../../models/users'
+import { Input, Paper, Typography, InputLabel, Button } from '@mui/material'
 
 function AddDisputes() {
   const user = useAppSelector((state) => state.users) as UserObj
@@ -23,7 +24,6 @@ function AddDisputes() {
     setFormData({ ...formData, [evt.target.name]: evt.target.value })
   }
 
-
   const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault()
     // check everything is there, if not send alert
@@ -36,60 +36,71 @@ function AddDisputes() {
   }
 
   return (
-    <>
+    <Paper sx={{ p: 2, alignContent: 'center', textAlign: 'center' }}>
+      <Typography variant="h6">Create new Dispute</Typography>
       {formVisible && (
         <div className="form-container">
           <form className="form" onSubmit={handleSubmit}>
-            <label htmlFor="dateIssued">Date issued:</label>
-            <input
+            <InputLabel htmlFor="dateIssued">Date issued:</InputLabel>
+            <Input
+              sx={{ mb: 1 }}
               type="date"
               id="dateIssued"
               name="date_issued"
               onChange={handleChange}
             />
-            <label htmlFor="timeIssued">Time issued:</label>
-            <input
+            <InputLabel htmlFor="timeIssued">Time issued:</InputLabel>
+            <Input
+              sx={{ mb: 1 }}
               type="time"
               id="timeIssued"
               name="time_issued"
               onChange={handleChange}
             />
-            <label htmlFor="infringement">Infringement Number:</label>
-            <input
+            <InputLabel htmlFor="infringement">Infringement Number:</InputLabel>
+            <Input
+              sx={{ mb: 1 }}
               type="number"
               id="infringement"
               name="infringement"
               onChange={handleChange}
             />
-            <label htmlFor="registration">License Plate:</label>
-            <input
+            <InputLabel htmlFor="registration">License Plate:</InputLabel>
+            <Input
+              sx={{ mb: 1 }}
               type="text"
               id="registration"
               name="registration"
               onChange={handleChange}
             />
-            <label htmlFor="location">Location:</label>
-            <input
+            <InputLabel htmlFor="location">Location:</InputLabel>
+            <Input
+              sx={{ mb: 1 }}
               type="text"
               id="location"
               name="location"
               onChange={handleChange}
             />
-            <label htmlFor="offence">Alleged Offence: </label>
-            <input
+            <InputLabel htmlFor="offence">Alleged Offence: </InputLabel>
+            <Input
+              sx={{ mb: 1 }}
               type="text"
               id="offence"
               name="offence"
               onChange={handleChange}
             />
-            <label htmlFor="amount">Amount Due: $</label>
-            <input
+            <InputLabel htmlFor="amount">Amount Due: $</InputLabel>
+            <Input
+              sx={{ mb: 1 }}
               type="number"
               id="amount"
               name="amount"
               onChange={handleChange}
             />
-            <input type="submit" value="Submit" />
+            <br />
+            <Button variant="contained" type="submit" value="Submit">
+              Submit
+            </Button>
           </form>
         </div>
       )}
@@ -97,12 +108,12 @@ function AddDisputes() {
         <div className="form-container">
           <h1>Dispute Submitted!</h1>
           <p>These bastards won&apos;t get away with this.</p>
-          <Link to="/disputes">
+          <Link to="/dashboard/disputes">
             <button>View my disputes</button>
           </Link>
         </div>
       )}
-    </>
+    </Paper>
   )
 }
 
