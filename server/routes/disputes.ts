@@ -4,6 +4,17 @@ import express from 'express'
 const router = express.Router()
 import * as db from '../db/disputes'
 
+router.post('/', async (req, res) => {
+  const dispute = req.body
+  console.log('postDispute server route', dispute)
+  try {
+    const newDispute = await db.addDispute(dispute)
+    res.json(newDispute[0])
+  } catch (err) {
+    res.sendStatus(500)
+  }
+})
+
 router.get('/:userId', async (req, res) => {
   const user_id = +req.params.userId
   try {
@@ -20,17 +31,6 @@ router.delete('/:id', async (req, res) => {
     await db.delDispute(id)
     res.sendStatus(200)
   } catch (error) {
-    res.sendStatus(500)
-  }
-})
-
-router.post('/', async (req, res) => {
-  const dispute = req.body
-  console.log('postDispute server route', dispute)
-  try {
-    const newDispute = await db.addDispute(dispute)
-    res.json(newDispute[0])
-  } catch (err) {
     res.sendStatus(500)
   }
 })
