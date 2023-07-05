@@ -57,3 +57,15 @@ export function addEmailThunk(email: EmailModels.New): ThunkAction {
     }
   }
 }
+
+export function addEmailAndSendReplyThunk(email: EmailModels.New): ThunkAction {
+  return async (dispatch) => {
+    try {
+      const newEmail = await api.postEmail(email)
+      await dispatch(addEmail(newEmail))
+      
+    } catch (err) {
+      dispatch(error(String(err)))
+    }
+  }
+}

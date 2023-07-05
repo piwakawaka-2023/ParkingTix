@@ -6,6 +6,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 import { useState, useRef } from 'react'
 import * as DisputeModels from '../../../models/disputes'
+import * as EmailModels from '../../../models/emails'
+import * as UserModels from '../../../models/users'
 import EmailsList from '../EmailsList'
 import {
   Divider,
@@ -17,12 +19,18 @@ import {
   MenuList,
   MenuItem,
 } from '@mui/material'
-import { useAppDispatch } from '../../hooks/hooks'
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 import * as action from '../../actions/disputes'
 
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import ClickAwayListener from '@mui/material/ClickAwayListener'
 import { checkInbox } from '../../apis/google'
+import {
+  checkInboxUtility,
+  extractReplyEmailText,
+} from '../../client_utils/google-utils'
+import { createNewEmailFromText } from '../../client_utils/email-utils'
+import { addEmailThunk } from '../../actions/emails'
 
 interface Props {
   dispute: DisputeModels.DisputeObj
@@ -44,6 +52,12 @@ function Dispute(props: Props) {
     offence,
     status,
   } = dispute
+
+  const userEmails = useAppSelector(
+    (state) => state.emails
+  ) as EmailModels.EmailObj[]
+
+  const user = useAppSelector((state) => state.users) as UserModels.UserObj
 
   const [open, setOpen] = useState(false)
   const anchorRef = useRef<HTMLDivElement>(null)
@@ -97,8 +111,22 @@ function Dispute(props: Props) {
   }
 
   const handleCheckInbox = async () => {
+    // return an array of strings from the email inbox
     const inbox = await checkInbox(thread_id)
-    console.log(inbox)
+
+    // If there's a new email present,
+    if (checkInboxUtility(id, userEmails, inbox)) {
+      // extract the new email from the inbox string
+      const replyText = extractReplyEmailText(inbox, user)
+
+      // construct a new email object to post to the db
+      const replyEmail = createNewEmailFromText(dispute, replyText, false)
+
+      // send that badboi to the db
+      dispatch(addEmailThunk(replyEmail))
+    } else {
+      alert('No news is good news!')
+    }
   }
 
   return (
