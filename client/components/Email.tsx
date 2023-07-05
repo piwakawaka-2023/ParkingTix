@@ -9,7 +9,7 @@ function Email(props: Props) {
   const { email } = props
   const { content } = email
 
-  console.log(content)
+  // console.log(content)
 
   return (
     <>

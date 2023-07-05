@@ -23,9 +23,9 @@ function App() {
   // Authenticated/Not Authenticated thingies go in this component
   // Db called to get user data from Home component once authenticated
 
-  useAppSelector((state) => {
-    console.log(state)
-  })
+  // useAppSelector((state) => {
+  //    console.log(state)
+  // })
 
   return (
     <>

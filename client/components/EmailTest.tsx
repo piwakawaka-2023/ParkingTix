@@ -75,7 +75,7 @@ function EmailTest() {
       [name]: value,
     })
     setCurrentDispute(getCurrentDispute(replyData.dispute_id))
-    console.log(replyData)
+    // console.log(replyData)
   }
 
   const handleSubmit = (evt: FormEvent) => {
@@ -97,7 +97,6 @@ function EmailTest() {
 
     // call a 'generate response' action using this email array
     dispatch(generateResponseEmail(currentDispute, emails))
-
   }
 
   useEffect(() => {
