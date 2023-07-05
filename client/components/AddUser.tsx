@@ -65,7 +65,7 @@ function AddUser() {
   }
 
   return (
-    <Paper sx={{ textAlign: 'center', height: '50vh', p: 2 }}>
+    <Paper sx={{ textAlign: 'center', height: '100vh', p: 2 }}>
       <Box>
         <Typography variant="h4">
           Welcome to Parking<span className="span-logo">Tix</span>
@@ -101,7 +101,8 @@ function AddUser() {
         {!formVisible && (
           <div className="form-container">
             <h1>Thank you for signing up!</h1>
-            <button onClick={getGoogleCode}>Continue</button>
+            {/* <button onClick={getGoogleCode}>Continue</button> */}
+            <button>Continue</button>
           </div>
         )}
       </Box>
