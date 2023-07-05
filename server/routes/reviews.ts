@@ -14,9 +14,15 @@ router.get('/', async (req, res) => {
 })
 router.post('/', async (req, res) => {
   const review = req.body
-
+  console.log('server route')
+  const dbReview = {
+    f_name: review.name,
+    rating: review.rating,
+    review: review.review,
+  }
   try {
-    const reviewFromDB = await db.addReview(review)
+    const reviewFromDB = await db.addReview(dbReview)
+    console.log(reviewFromDB)
     res.json(reviewFromDB[0])
   } catch (error) {
     ;('oh no post reviews route error')

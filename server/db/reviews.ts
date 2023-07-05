@@ -10,13 +10,16 @@ export function getAllReviews(): Promise<ReviewModels.ReviewObj[]> {
 
 //POST
 export function addReview(review: string): Promise<ReviewModels.New[]> {
-  return db('reviews').insert(review).returning(['name', 'rating', 'review'])
+  return db('reviews').insert(review).returning('*')
 }
 
 // //UPDATE
 export function updateReview(id: number, newReview: ReviewModels.Update) {
   const { f_name, rating, review } = newReview
-  return db('reviews').update({ f_name, rating, review }).where({ id }).returning('*')
+  return db('reviews')
+    .update({ f_name, rating, review })
+    .where({ id })
+    .returning('*')
 }
 
 //DELETE

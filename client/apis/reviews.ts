@@ -14,6 +14,7 @@ export async function fetchReviews(
 export async function postReview(
   newReview: ReviewModels.New
 ): Promise<ReviewModels.ReviewObj> {
+  console.log('api', newReview)
   const res = await request.post(reviewsUrl).send(newReview)
   const newReviewFromDb = res.body
   return newReviewFromDb
@@ -31,7 +32,3 @@ export async function updateReview(
 export async function deleteReview(id: number) {
   await request.delete(`${reviewsUrl}/${id}`)
 }
-
-
-
-

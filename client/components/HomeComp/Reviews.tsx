@@ -1,4 +1,5 @@
 import {
+  Button,
   Box,
   Typography,
   Rating,
@@ -7,6 +8,8 @@ import {
   Grid,
   Paper,
 } from '@mui/material'
+import AddReviewsForm from '../AddReviews'
+import { Link } from 'react-router-dom'
 
 const reviewsData = [
   {
@@ -55,7 +58,11 @@ function Reviews() {
       <Box sx={{ pt: 2, pb: 2 }}>
         <Typography variant="h4" sx={{ mt: 1, textAlign: 'center' }}>
           Reviews
+          <Button component={Link} to="AddReviewForm">
+            Add a review
+          </Button>
         </Typography>
+
         <Grid container spacing={2} sx={{ p: 1 }}>
           {reviewsData.map((review, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>

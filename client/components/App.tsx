@@ -9,6 +9,7 @@ import Nav from './Nav'
 import { CssBaseline } from '@mui/material'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Footer from './Footer'
+import AddReviewsForm from './AddReviews'
 import NotFoundPage from './NotFoundPage'
 import GmailAuthLanding from './GmailAuthLanding'
 import EmailTest from './EmailTest'
@@ -37,6 +38,7 @@ function App() {
             <Route path="/signup" element={<AddUser />} />
             <Route path="*" element={<NotFoundPage />} />
             <Route path="/gmailAuthLanding" element={<GmailAuthLanding />} />
+            <Route path="/AddReviewForm" element={<AddReviewsForm/>} />
           </Routes>
         </IfAuthenticated>
         <IfNotAuthenticated>
