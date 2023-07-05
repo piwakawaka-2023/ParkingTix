@@ -1,6 +1,7 @@
 import type { ThunkAction } from '../store'
 import * as EmailModels from '../../models/emails'
 import * as api from '../apis/emails'
+import { generateResponseEmail } from './openai'
 
 // * SIMPLE ACTIONS
 
@@ -52,18 +53,6 @@ export function addEmailThunk(email: EmailModels.New): ThunkAction {
     try {
       const newEmail = await api.postEmail(email)
       dispatch(addEmail(newEmail))
-    } catch (err) {
-      dispatch(error(String(err)))
-    }
-  }
-}
-
-export function addEmailAndSendReplyThunk(email: EmailModels.New): ThunkAction {
-  return async (dispatch) => {
-    try {
-      const newEmail = await api.postEmail(email)
-      await dispatch(addEmail(newEmail))
-      
     } catch (err) {
       dispatch(error(String(err)))
     }

@@ -31,6 +31,7 @@ import {
 } from '../../client_utils/google-utils'
 import { createNewEmailFromText } from '../../client_utils/email-utils'
 import { addEmailThunk } from '../../actions/emails'
+import { generateResponseEmail } from '../../actions/openai'
 
 interface Props {
   dispute: DisputeModels.DisputeObj
@@ -58,6 +59,7 @@ function Dispute(props: Props) {
   ) as EmailModels.EmailObj[]
 
   const user = useAppSelector((state) => state.users) as UserModels.UserObj
+  const [canReply, setCanReply] = useState(false)
 
   const [open, setOpen] = useState(false)
   const anchorRef = useRef<HTMLDivElement>(null)
@@ -113,6 +115,7 @@ function Dispute(props: Props) {
   const handleCheckInbox = async () => {
     // return an array of strings from the email inbox
     const inbox = await checkInbox(thread_id)
+    console.log(inbox)
 
     // If there's a new email present,
     if (checkInboxUtility(id, userEmails, inbox)) {
@@ -124,9 +127,23 @@ function Dispute(props: Props) {
 
       // send that badboi to the db
       dispatch(addEmailThunk(replyEmail))
+
+      // make the reply button appear
+      setCanReply(true)
     } else {
       alert('No news is good news!')
     }
+  }
+
+  const handleSendReply = () => {
+    // auto reply, feat. the world's worst example of separation of concerns
+    const dbDisputeEmails = userEmails.filter((email) => {
+      return email.dispute_id === id
+    })
+
+    // call a 'generate response' action using this email array
+    dispatch(generateResponseEmail(dispute, dbDisputeEmails, user.email))
+    setCanReply(false)
   }
 
   return (
@@ -213,6 +230,7 @@ function Dispute(props: Props) {
           </Popper>
           <Button onClick={() => handleDelete(id)}>Delete</Button>
           <Button onClick={handleCheckInbox}>Check Inbox</Button>
+          {canReply && <Button onClick={handleSendReply}>Reply</Button>}
         </ButtonGroup>
         <EmailsList key={id} disputeId={id} />
         <Divider sx={{ mb: 1, mt: 1 }} />
