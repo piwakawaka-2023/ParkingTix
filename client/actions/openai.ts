@@ -64,6 +64,7 @@ export function generateInitialEmail(
         message: initialEmailText,
         infringementNo: dispute.infringement,
       }
+      console.log(gmailEmail)
 
       // send the initial email to the Gmail api here
       const threadId = await sendEmail(gmailEmail)
