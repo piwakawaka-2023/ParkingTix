@@ -33,6 +33,7 @@ router.post('/thread', async (req, res) => {
 
 router.post('/send', async (req, res) => {
   const email = req.body.email
+  console.log('Google server route', email)
   const threadId = await sendMail(email)
   res.send(threadId)
 })

@@ -28,7 +28,7 @@ function AddDisputes() {
     evt.preventDefault()
     // check everything is there, if not send alert
     if (checkNewDisputeForm(formData)) {
-      dispatch(actions.addDisputeThunk(formData))
+      dispatch(actions.addDisputeThunk(formData, user.email))
       setFormVisible(false)
     } else {
       alert('Please fill in all required fields')
