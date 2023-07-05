@@ -14,6 +14,8 @@ import * as api from '../apis/openai'
 
 import * as emailActions from './emails'
 import { createNewEmailFromText } from '../client_utils/email-utils'
+import { sendEmail } from '../apis/google'
+import { updateDisputeThunk } from './disputes'
 
 //* ----------------------------- *//
 //*   Variables
@@ -45,7 +47,8 @@ export function error(message: string): Action {
 
 //* Generate intial email from a new dispute
 export function generateInitialEmail(
-  dispute: DisputeModels.DisputeUserDetails
+  dispute: DisputeModels.DisputeUserDetails,
+  userEmail: string
 ): ThunkAction {
   return async (dispatch) => {
     try {
@@ -53,8 +56,19 @@ export function generateInitialEmail(
       const initialEmailText = await api.fetchInitialEmail(dispute)
       // call util function to create a new email object
       const email = createNewEmailFromText(dispute, initialEmailText, true)
+      const gmailEmail = {
+        firstName: dispute.f_name,
+        lastName: dispute.l_name,
+        email: userEmail,
+        recipient: dispute.recipient,
+        message: initialEmailText,
+        infringementNo: dispute.infringement,
+      }
+      console.log(gmailEmail)
 
       // send the initial email to the Gmail api here
+      const threadId = await sendEmail(gmailEmail)
+      dispatch(updateDisputeThunk(dispute.id, { thread_id: threadId }))
 
       // call the add email thunk to post the new email to the db
       dispatch(emailActions.addEmailThunk(email))

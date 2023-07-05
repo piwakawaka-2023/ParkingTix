@@ -10,6 +10,16 @@ import { checkNewUserForm } from '../client_utils/form-utils'
 import { Link } from 'react-router-dom'
 import { fetchAllUsers } from '../apis/users'
 import { getGoogleCode } from '../apis/google'
+import {
+  Paper,
+  Typography,
+  Box,
+  Input,
+  InputLabel,
+  TextField,
+  Button,
+  Divider,
+} from '@mui/material'
 
 function AddUser() {
   const dispatch = useAppDispatch()
@@ -18,7 +28,6 @@ function AddUser() {
   // console.log('auth0 info:', user)
   const [formData, setFormData] = useState({} as UserModels.New)
   const [formVisible, setFormVisible] = useState(true)
-
 
   useEffect(() => {
     setFormData({
@@ -56,35 +65,47 @@ function AddUser() {
   }
 
   return (
-    <>
-      {formVisible && (
-        <div className="form-container">
-          <form className="form" onSubmit={handleSubmit}>
-            <label htmlFor="f_name">First name:</label>
-            <input
-              type="text"
-              id="fName"
-              name="f_name"
-              onChange={handleChange}
-            />
-            <label htmlFor="l_name">Last name:</label>
-            <input
-              type="text"
-              id="lName"
-              name="l_name"
-              onChange={handleChange}
-            />
-            <input type="submit" value="Submit" />
-          </form>
-        </div>
-      )}
-      {!formVisible && (
-        <div className="form-container">
-          <h1>Thank you for signing up!</h1>
+    <Paper sx={{ textAlign: 'center', height: '100vh', p: 2 }}>
+      <Box>
+        <Typography variant="h4">
+          Welcome to Parking<span className="span-logo">Tix</span>
+        </Typography>
+        <Typography variant="body2" sx={{ mb: 1 }}>
+          We just want a little more infromation from you.
+        </Typography>
+        {formVisible && (
+          <Box className="form-container" sx={{ mb: 5 }}>
+            <form className="form" onSubmit={handleSubmit}>
+              <InputLabel htmlFor="f_name">First name:</InputLabel>
+              <Input
+                type="text"
+                id="fName"
+                name="f_name"
+                onChange={handleChange}
+              />
+              <InputLabel htmlFor="l_name">Last name:</InputLabel>
+              <TextField
+                type="text"
+                id="lName"
+                name="l_name"
+                onChange={handleChange}
+                variant="standard"
+              />
+              <br />
+              <Button sx={{ mb: 5 }} type="submit" value="Submit">
+                Submit
+              </Button>
+            </form>
+          </Box>
+        )}
+        {!formVisible && (
+          <div className="form-container">
+            <h1>Thank you for signing up!</h1>
             <button onClick={getGoogleCode}>Continue</button>
-        </div>
-      )}
-    </>
+          </div>
+        )}
+      </Box>
+    </Paper>
   )
 }
 

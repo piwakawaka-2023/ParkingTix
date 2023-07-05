@@ -10,6 +10,8 @@ export interface DisputeObj {
   location: string
   amount: number
   status: string
+  recipient: string
+  thread_id: string
 }
 
 export interface New {
@@ -22,18 +24,22 @@ export interface New {
   location: string
   amount: number
   status: string
+  recipient?: string
+  thread_id?: string
 }
 
 export interface Update {
   user_id?: number
   infringement?: number
   registration?: string
-  offence: string
+  offence?: string
   date_issued?: string
   time_issued?: string
   location?: string
   amount?: number
   status?: string
+  recipient?: string
+  thread_id?: string
 }
 
 export interface DisputeUserDetails extends DisputeObj {
