@@ -45,7 +45,7 @@ export default function disputeReducers(state = initialState, action: Action) {
     case UPD_DISPUTE:
       return state.map((dispute) => {
         if (dispute.id === payload.id) {
-          return { payload }
+          return payload
         }
         return dispute
       })
