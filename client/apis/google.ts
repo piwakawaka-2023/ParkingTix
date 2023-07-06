@@ -22,6 +22,11 @@ export async function sendEmail(email) {
   return threadId
 }
 
+export async function sendResponseEmail(email) {
+  const res = await request.post('/api/v1/gmail/send/reply').send({ email })
+  console.log(res.body)
+}
+
 export async function checkInbox(threadId: string) {
   const res = await request.post('/api/v1/gmail/thread').send({ threadId })
   const emails = res.body

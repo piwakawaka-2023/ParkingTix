@@ -1,5 +1,5 @@
 const { google } = require('googleapis')
-import { Email } from '../../models/google'
+import { Email, ReplyEmail } from '../../models/google'
 
 const oauth2Client = new google.auth.OAuth2(
   '607422315781-dlrhdddnoefbe9o5h6725p57oj951o24.apps.googleusercontent.com',
@@ -64,6 +64,39 @@ export async function sendMail(email: Email) {
     },
   })
   return response.data.threadId
+}
+
+export async function sendResponseMail(email: ReplyEmail) {
+  console.log('this is the thread id:', email.thread_id)
+  const subject = `Ticket Number ${email.infringementNo} Dispute`
+  const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`
+  const messageParts = [
+    `From: ${email.firstName} ${email.lastName} <${email.email}>`,
+    `To: Oscar McGoldrick <${email.recipient}>`,
+    'Content-Type: text/html; charset=utf-8',
+    'MIME-Version: 1.0',
+    `Subject: ${utf8Subject}`,
+    '',
+    `${email.message}`,
+  ]
+  const message = messageParts.join('\n')
+
+  // The decodedBodyds to be base64url encoded.
+  const encodedMessage = Buffer.from(message)
+    .toString('base64')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '')
+
+  // send an email via the gmail api
+  const gmail = google.gmail({ version: 'v1', auth: oauth2Client })
+  await gmail.users.messages.send({
+    userId: 'me',
+    requestBody: {
+      raw: encodedMessage,
+      threadId: email.thread_id,
+    },
+  })
 }
 
 export async function getMail() {

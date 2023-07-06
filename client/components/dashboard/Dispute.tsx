@@ -115,7 +115,6 @@ function Dispute(props: Props) {
   const handleCheckInbox = async () => {
     // return an array of strings from the email inbox
     const inbox = await checkInbox(thread_id)
-    console.log(inbox)
 
     // If there's a new email present,
     if (checkInboxUtility(id, userEmails, inbox)) {
@@ -142,6 +141,7 @@ function Dispute(props: Props) {
     })
 
     // call a 'generate response' action using this email array
+    console.log('component thread id:', dispute.thread_id)
     dispatch(generateResponseEmail(dispute, dbDisputeEmails, user.email))
     setCanReply(false)
   }
