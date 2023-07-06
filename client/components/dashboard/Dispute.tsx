@@ -6,6 +6,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 import { useState, useRef } from 'react'
 import * as DisputeModels from '../../../models/disputes'
+import * as EmailModels from '../../../models/emails'
+import * as UserModels from '../../../models/users'
 import EmailsList from '../EmailsList'
 import {
   Divider,
@@ -17,11 +19,19 @@ import {
   MenuList,
   MenuItem,
 } from '@mui/material'
-import { useAppDispatch } from '../../hooks/hooks'
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 import * as action from '../../actions/disputes'
 
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import ClickAwayListener from '@mui/material/ClickAwayListener'
+import { checkInbox } from '../../apis/google'
+import {
+  checkInboxUtility,
+  extractReplyEmailText,
+} from '../../client_utils/google-utils'
+import { createNewEmailFromText } from '../../client_utils/email-utils'
+import { addEmailThunk } from '../../actions/emails'
+import { generateResponseEmail } from '../../actions/openai'
 
 interface Props {
   dispute: DisputeModels.DisputeObj
@@ -38,10 +48,18 @@ function Dispute(props: Props) {
     registration,
     time_issued,
     location,
+    thread_id,
     amount,
     offence,
     status,
   } = dispute
+
+  const userEmails = useAppSelector(
+    (state) => state.emails
+  ) as EmailModels.EmailObj[]
+
+  const user = useAppSelector((state) => state.users) as UserModels.UserObj
+  const [canReply, setCanReply] = useState(false)
 
   const [open, setOpen] = useState(false)
   const anchorRef = useRef<HTMLDivElement>(null)
@@ -92,6 +110,40 @@ function Dispute(props: Props) {
   const handleFailed = () => {
     dispatch(action.updateDisputeThunk(id, { status: 'Failed' }))
     window.location.reload()
+  }
+
+  const handleCheckInbox = async () => {
+    // return an array of strings from the email inbox
+    const inbox = await checkInbox(thread_id)
+    console.log(inbox)
+
+    // If there's a new email present,
+    if (checkInboxUtility(id, userEmails, inbox)) {
+      // extract the new email from the inbox string
+      const replyText = extractReplyEmailText(inbox, user)
+
+      // construct a new email object to post to the db
+      const replyEmail = createNewEmailFromText(dispute, replyText, false)
+
+      // send that badboi to the db
+      dispatch(addEmailThunk(replyEmail))
+
+      // make the reply button appear
+      setCanReply(true)
+    } else {
+      alert('No news is good news!')
+    }
+  }
+
+  const handleSendReply = () => {
+    // auto reply, feat. the world's worst example of separation of concerns
+    const dbDisputeEmails = userEmails.filter((email) => {
+      return email.dispute_id === id
+    })
+
+    // call a 'generate response' action using this email array
+    dispatch(generateResponseEmail(dispute, dbDisputeEmails, user.email))
+    setCanReply(false)
   }
 
   return (
@@ -177,6 +229,8 @@ function Dispute(props: Props) {
             )}
           </Popper>
           <Button onClick={() => handleDelete(id)}>Delete</Button>
+          <Button onClick={handleCheckInbox}>Check Inbox</Button>
+          {canReply && <Button onClick={handleSendReply}>Reply</Button>}
         </ButtonGroup>
         <EmailsList key={id} disputeId={id} />
         <Divider sx={{ mb: 1, mt: 1 }} />

@@ -7,6 +7,7 @@ import { useAppDispatch } from '../hooks/hooks'
 import { ThunkAction } from '../store'
 import EmailsList from './EmailsList'
 import { update } from 'immutable'
+import { checkInbox } from '../apis/google'
 
 interface Props {
   dispute: DisputeModels.DisputeObj
@@ -21,6 +22,7 @@ function Dispute(props: Props) {
     infringement,
     registration,
     time_issued,
+    thread_id,
     location,
     amount,
     status,
@@ -43,6 +45,11 @@ function Dispute(props: Props) {
     window.location.reload()
   }
 
+  const handleCheckInbox = async () => {
+    const inbox = await checkInbox(thread_id)
+    console.log(inbox)
+  }
+
   return (
     <>
       <div>
@@ -55,6 +62,7 @@ function Dispute(props: Props) {
           <p>Amount Due: ${amount}</p>
         </div>
         <p>{status}</p>
+        <button onClick={handleCheckInbox}>Check Inbox</button>
         <EmailsList key={id} disputeId={id} />
       </div>
       {/* STYLING FOR DROP DOWN IS IN ./STYLES/INDEX.CSS */}
