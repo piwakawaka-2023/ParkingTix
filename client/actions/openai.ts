@@ -41,6 +41,9 @@ export function error(message: string): Action {
   }
 }
 
+let firstName = ''
+let lastName = ''
+
 //--------------
 // Thunkie Bois
 //--------------
@@ -64,7 +67,9 @@ export function generateInitialEmail(
         message: initialEmailText,
         infringementNo: dispute.infringement,
       }
-      console.log(gmailEmail)
+
+      firstName = dispute.f_name
+      lastName = dispute.l_name
 
       // send the initial email to the Gmail api here
       const threadId = await sendEmail(gmailEmail)
@@ -81,7 +86,8 @@ export function generateInitialEmail(
 //* Generate response email from an array of emails in a thread
 export function generateResponseEmail(
   dispute: DisputeModels.DisputeObj,
-  emails: EmailModels.EmailObj[]
+  emails: EmailModels.EmailObj[],
+  userEmail: string
 ): ThunkAction {
   return async (dispatch) => {
     try {
@@ -94,7 +100,18 @@ export function generateResponseEmail(
       // call util function to create a new email object from the body text
       const email = createNewEmailFromText(dispute, text, false)
 
-      // send the initial email to the Gmail api here
+      // send the response email to the Gmail api here
+      const gmailEmail = {
+        firstName: firstName,
+        lastName: lastName,
+        email: userEmail,
+        recipient: dispute.recipient,
+        message: text,
+        infringementNo: dispute.infringement,
+      }
+
+      // actually send the thing
+      sendEmail(gmailEmail)
 
       // call the add email thunk to post the new email to the db
       dispatch(emailActions.addEmailThunk(email))

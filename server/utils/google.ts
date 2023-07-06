@@ -13,7 +13,10 @@ export function getAuthURL() {
     access_type: 'offline',
     /** Pass in the scopes array defined above.
      * Alternatively, if only one scope is needed, you can pass a scope URL as a string */
-    scope: ['https://www.googleapis.com/auth/gmail.send'],
+    scope: [
+      'https://www.googleapis.com/auth/gmail.send',
+      'https://www.googleapis.com/auth/gmail.readonly',
+    ],
     // Enable incremental authorization. Recommended as a best practice.
     include_granted_scopes: true,
   })
@@ -121,10 +124,11 @@ export async function getProfile() {
 }
 
 export async function getMessagesByThread(threadId: string) {
+  console.log(threadId)
   const gmail = google.gmail({ version: 'v1', auth: oauth2Client })
   const messages = await gmail.users.threads.get({
     userId: 'me',
-    id: '18918773662fbcbe',
+    id: threadId,
   })
 
   const messagePartArr = messages.data.messages

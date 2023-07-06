@@ -1,6 +1,7 @@
 import type { ThunkAction } from '../store'
 import * as EmailModels from '../../models/emails'
 import * as api from '../apis/emails'
+import { generateResponseEmail } from './openai'
 
 // * SIMPLE ACTIONS
 
