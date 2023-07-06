@@ -6,3 +6,7 @@ export interface Email {
   message: Text,
   infringementNo: string
 }
+
+export interface ReplyEmail extends Email {
+  thread_id: string
+}

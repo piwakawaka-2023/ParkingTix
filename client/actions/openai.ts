@@ -14,7 +14,7 @@ import * as api from '../apis/openai'
 
 import * as emailActions from './emails'
 import { createNewEmailFromText } from '../client_utils/email-utils'
-import { sendEmail } from '../apis/google'
+import { sendEmail, sendResponseEmail } from '../apis/google'
 import { updateDisputeThunk } from './disputes'
 
 //* ----------------------------- *//
@@ -73,7 +73,7 @@ export function generateInitialEmail(
 
       // send the initial email to the Gmail api here
       const threadId = await sendEmail(gmailEmail)
-      dispatch(updateDisputeThunk(dispute.id, { thread_id: threadId }))
+      dispatch(updateDisputeThunk(dispute.id, { thread_id: threadId, status: 'In Progress' }))
 
       // call the add email thunk to post the new email to the db
       dispatch(emailActions.addEmailThunk(email))
@@ -108,10 +108,12 @@ export function generateResponseEmail(
         recipient: dispute.recipient,
         message: text,
         infringementNo: dispute.infringement,
+        threadId: dispute.thread_id
       }
+      console.log('front end thread id:', dispute.thread_id)
 
       // actually send the thing
-      sendEmail(gmailEmail)
+      sendResponseEmail(gmailEmail)
 
       // call the add email thunk to post the new email to the db
       dispatch(emailActions.addEmailThunk(email))
